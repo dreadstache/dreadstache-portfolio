@@ -31,6 +31,7 @@ export default function Home() {
   const [wireframe, setWireframe] = useState(false);
   const [panel, setPanel] = useState<"light" | "model">("light");
   const [savedModels, setSavedModels] = useState<SavedModel[]>([]);
+  const [canImport, setCanImport] = useState(false);
   const [uploadState, setUploadState] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [uploadMessage, setUploadMessage] = useState("");
   const objectUrl = useRef<string | null>(null);
@@ -40,7 +41,10 @@ export default function Home() {
   useEffect(() => {
     fetch("/api/models")
       .then((response) => response.ok ? response.json() : Promise.reject())
-      .then((data: { models: SavedModel[] }) => setSavedModels(data.models))
+      .then((data: { models: SavedModel[]; canImport: boolean }) => {
+        setSavedModels(data.models);
+        setCanImport(data.canImport);
+      })
       .catch(() => setUploadMessage("Saved library is temporarily unavailable."));
   }, []);
 
@@ -115,9 +119,9 @@ export default function Home() {
     <main>
       <Script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js" />
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="Vanta Model Atelier home"><span className="brandmark">V</span><span>VANTA<br/><small>MODEL ATELIER</small></span></a>
+        <a className="brand" href="#top" aria-label="DREADSTACHE portfolio home"><span className="brandmark">D</span><span>DREADSTACHE<br/><small>GAMES / FILM PORTFOLIO</small></span></a>
         <nav aria-label="Primary"><a className="active" href="#viewer">VIEWER</a><a href="#collection">COLLECTION</a><a href="#about">ABOUT</a></nav>
-        <label className="uploadButton">+ IMPORT MODEL<input type="file" accept=".glb,.gltf,model/gltf-binary,model/gltf+json" onChange={uploadModel}/></label>
+        {canImport && <label className="uploadButton">+ IMPORT MODEL<input type="file" accept=".glb,.gltf,model/gltf-binary,model/gltf+json" onChange={uploadModel}/></label>}
       </header>
 
       <section id="viewer" className="workspace">
@@ -134,11 +138,11 @@ export default function Home() {
               <span className="savedGlyph">{String(index + 1).padStart(2, "0")}</span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB · SAVED</small>
             </button>) : <div className="emptyLibrary">Your saved models will appear here.</div>}
           </div>
-          <div className="uploadCard">
+          {canImport && <div className="uploadCard">
             <span>ADD TO LIBRARY</span><strong>{uploadedName || "Upload a model"}</strong><p>GLB or GLTF, up to 100 MB. Uploaded models are saved for visitors to view.</p>
             <label className={uploadState === "saving" ? "isSaving" : ""}>{uploadState === "saving" ? "SAVING…" : "CHOOSE & SAVE FILE"}<input disabled={uploadState === "saving"} type="file" accept=".glb,.gltf" onChange={uploadModel}/></label>
             {uploadMessage && <p className={`uploadStatus ${uploadState}`}>{uploadMessage}</p>}
-          </div>
+          </div>}
         </aside>
 
         <section className="stage" style={{ backgroundColor: background }}>
@@ -171,7 +175,7 @@ export default function Home() {
           <div className="saveNote"><span>SHARED MODEL LIBRARY</span><p>Uploaded models remain available in the carousel across visits.</p></div>
         </aside>
       </section>
-      <footer id="about"><span>VANTA / 2026</span><p>A focused review room for game and film development assets.</p><span>WEBGL VIEWER</span></footer>
+      <footer id="about"><span>DREADSTACHE / 2026</span><p>A focused showcase for original game and film development artwork.</p><span>GAMES / FILM PORTFOLIO</span></footer>
     </main>
   );
 }
