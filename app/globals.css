@@ -32,11 +32,28 @@ nav a.active, nav a:hover { color:var(--ink); border-bottom-color:var(--acid); }
 .piece strong { display:block; font:12px Syne; margin-bottom:7px; }
 .piece small { font:8px DM Mono; letter-spacing:.08em; color:#696669; }
 .piece i { font-style:normal; font-size:13px; }
+.libraryHead { display:flex; align-items:center; justify-content:space-between; margin-top:22px; color:#858085; font:8px DM Mono; letter-spacing:.14em; }
+.libraryHead div { display:flex; gap:4px; }
+.libraryHead button { width:24px; height:24px; border:1px solid #343034; background:transparent; color:#8d888d; cursor:pointer; }
+.libraryHead button:hover { color:var(--acid); border-color:var(--acid); }
+.modelCarousel { display:flex; gap:8px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; padding:10px 0 3px; }
+.modelCarousel::-webkit-scrollbar { display:none; }
+.savedCard { min-width:158px; height:112px; scroll-snap-align:start; display:flex; flex-direction:column; justify-content:flex-end; text-align:left; border:1px solid #302d30; padding:11px; color:#9b969b; background:radial-gradient(circle at 75% 20%,#ff2f7522,transparent 38%),linear-gradient(145deg,#211d20,#151315); cursor:pointer; }
+.savedCard:hover,.selectedCard { border-color:var(--acid); color:var(--ink); }
+.savedGlyph { margin-bottom:auto; color:var(--acid); font:8px DM Mono; }
+.savedCard strong { font:11px Syne; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.savedCard small { margin-top:6px; color:#6f6a6f; font:7px DM Mono; letter-spacing:.08em; }
+.emptyLibrary { width:100%; border:1px dashed #353035; padding:18px 12px; color:#686368; font:9px/1.5 DM Mono; }
 .uploadCard { margin-top:26px; border:1px dashed #3d3a3d; padding:16px; }
 .uploadCard span, .modelPanel label, .presets>label { font:8px DM Mono; letter-spacing:.14em; color:var(--acid); }
 .uploadCard strong { display:block; font:13px Syne; margin:12px 0 6px; overflow:hidden; text-overflow:ellipsis; }
 .uploadCard p, .modelPanel p, .saveNote p { font:10px/1.6 DM Mono; color:#706d70; }
 .uploadCard label { display:block; color:#bbb; font:9px DM Mono; letter-spacing:.1em; border-top:1px solid #312f31; padding-top:12px; cursor:pointer; }
+.uploadCard label:hover { color:var(--acid); }
+.uploadCard label.isSaving { color:#817b81; cursor:wait; }
+.uploadCard .uploadStatus { border-top:1px solid #2d2a2d; margin:12px 0 0; padding-top:10px; }
+.uploadCard .uploadStatus.saved { color:#ff79a7; }
+.uploadCard .uploadStatus.error { color:#ff755f; }
 .stage { position:relative; min-height:680px; overflow:hidden; isolation:isolate; transition:background-color .25s; }
 .stage::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg,transparent 49.8%,#ffffff0b 50%,transparent 50.2%), linear-gradient(0deg,transparent 49.8%,#ffffff09 50%,transparent 50.2%); background-size:100% 100%,100% 100%; z-index:2; }
 .stageGlow { position:absolute; inset:0; z-index:1; transition:background .2s; }
