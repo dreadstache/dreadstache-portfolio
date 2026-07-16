@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Vanta Model Atelier — Interactive 3D Review",
+  title: "DREADSTACHE: Games / Film Portfolio",
   description: "Present game and film development models in a customizable cinematic lighting studio.",
 };
 
