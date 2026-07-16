@@ -10,7 +10,7 @@ const pieces = [
 ];
 
 const presets = [
-  { name: "Moonlit", exposure: 0.75, shadow: 1.1, color: "#b9d8ff", bg: "#07101b" },
+  { name: "Crimson", exposure: 0.75, shadow: 1.1, color: "#ff2f75", bg: "#3b0814" },
   { name: "Ember", exposure: 1.15, shadow: 0.7, color: "#ff734c", bg: "#160b08" },
   { name: "Gallery", exposure: 1.4, shadow: 0.45, color: "#fff5df", bg: "#d8d2c7" },
 ];
@@ -21,8 +21,8 @@ export default function Home() {
   const [uploadedName, setUploadedName] = useState("");
   const [exposure, setExposure] = useState(0.9);
   const [shadow, setShadow] = useState(0.8);
-  const [lightColor, setLightColor] = useState("#b9d8ff");
-  const [background, setBackground] = useState("#07101b");
+  const [lightColor, setLightColor] = useState("#ff2f75");
+  const [background, setBackground] = useState("#3b0814");
   const [lightX, setLightX] = useState(38);
   const [lightY, setLightY] = useState(22);
   const [rotate, setRotate] = useState(true);
