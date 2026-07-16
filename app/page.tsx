@@ -21,8 +21,8 @@ export default function Home() {
   const [active, setActive] = useState(0);
   const [modelSrc, setModelSrc] = useState(pieces[0].src);
   const [uploadedName, setUploadedName] = useState("");
-  const [exposure, setExposure] = useState(0.9);
-  const [shadow, setShadow] = useState(0.8);
+  const [exposure, setExposure] = useState(0.2);
+  const [shadow, setShadow] = useState(2.0);
   const [lightColor, setLightColor] = useState("#ff2f75");
   const [background, setBackground] = useState("#3b0814");
   const [lightX, setLightX] = useState(38);
