@@ -6,9 +6,9 @@ import React, { ChangeEvent, useEffect, useMemo, useRef, useState } from "react"
 type SavedModel = { id: string; name: string; size: number; uploadedAt: string; url: string };
 
 const pieces = [
-  { title: "Ivory Vanguard", kind: "Character / Game", file: "vanguard_04.glb", polys: "84.2K", src: "https://modelviewer.dev/shared-assets/models/Astronaut.glb", camera: "0deg 75deg 2.4m" },
-  { title: "Kintsugi Sentinel", kind: "Creature / Film", file: "sentinel_final.glb", polys: "126K", src: "https://modelviewer.dev/shared-assets/models/RobotExpressive.glb", camera: "28deg 72deg 2.1m" },
-  { title: "Signal Runner", kind: "Prop / Game", file: "signal_runner.glb", polys: "48.8K", src: "https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb", camera: "-22deg 68deg 2.5m" },
+  { title: "Arkane Face I", kind: "Character / 3D Scan", file: "arkaneface1.glb", polys: "ORIGINAL SCAN", src: "/api/models/1784245710547-4c52747f-35e4-49b5-b684-0bfbc6955d69-arkaneface1.glb", camera: "0deg 75deg 2.4m" },
+  { title: "Arkane Face II", kind: "Character / 3D Scan", file: "arkaneface2.glb", polys: "ORIGINAL SCAN", src: "/api/models/1784246818750-2331df04-f836-40ae-9f85-1563f0104c48-arkaneface2.glb", camera: "20deg 75deg 2.4m" },
+  { title: "Arkane Face III", kind: "Character / 3D Scan", file: "arkaneface3.glb", polys: "ORIGINAL SCAN", src: "/api/models/1784245715831-b83bfd3b-c6c7-484e-a41c-8e78be8880cc-arkaneface3.glb", camera: "-20deg 75deg 2.4m" },
 ];
 
 const presets = [
