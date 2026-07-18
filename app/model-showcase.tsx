@@ -34,6 +34,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   const [canImport, setCanImport] = useState(false);
   const [uploadState, setUploadState] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [uploadMessage, setUploadMessage] = useState("");
+  const [removingId, setRemovingId] = useState("");
   const objectUrl = useRef<string | null>(null);
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const piece = pieces[active];
@@ -94,6 +95,29 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     setUploadState("saved"); setUploadMessage("Viewing a saved library model.");
   }
 
+  async function removeSavedModel(model: SavedModel) {
+    const displayName = model.name.replace(/\.(glb|gltf)$/i, "");
+    if (!window.confirm(`Remove “${displayName}” from the presentation library? This cannot be undone.`)) return;
+
+    setRemovingId(model.id);
+    setUploadState("saving");
+    setUploadMessage(`Removing ${displayName}…`);
+    try {
+      const response = await fetch(`/api/models/${encodeURIComponent(model.id)}`, { method: "DELETE" });
+      const data = await response.json() as { error?: string };
+      if (!response.ok) throw new Error(data.error || "The model could not be removed.");
+      setSavedModels((current) => current.filter((item) => item.id !== model.id));
+      if (modelSrc === model.url) selectPiece(0);
+      setUploadState("saved");
+      setUploadMessage(`${displayName} was removed from the library.`);
+    } catch (error) {
+      setUploadState("error");
+      setUploadMessage(error instanceof Error ? error.message : "The model could not be removed.");
+    } finally {
+      setRemovingId("");
+    }
+  }
+
   function moveCarousel(direction: number) {
     carouselRef.current?.scrollBy({ left: direction * 190, behavior: "smooth" });
   }
@@ -135,9 +159,12 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
           </div>
           {studioMode && <><div className="libraryHead"><span>SAVED LIBRARY</span><div><button aria-label="Previous saved models" onClick={() => moveCarousel(-1)}>←</button><button aria-label="Next saved models" onClick={() => moveCarousel(1)}>→</button></div></div>
           <div className="modelCarousel" ref={carouselRef} aria-label="Saved model carousel">
-            {savedModels.length ? savedModels.map((model, index) => <button key={model.id} className={modelSrc === model.url ? "savedCard selectedCard" : "savedCard"} onClick={() => selectSavedModel(model)}>
-              <span className="savedGlyph">{String(index + 1).padStart(2, "0")}</span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB · SAVED</small>
-            </button>) : <div className="emptyLibrary">Your saved models will appear here.</div>}
+            {savedModels.length ? savedModels.map((model, index) => <div key={model.id} className={modelSrc === model.url ? "savedCard selectedCard" : "savedCard"}>
+              <button className="savedSelect" onClick={() => selectSavedModel(model)}>
+                <span className="savedGlyph">{String(index + 1).padStart(2, "0")}</span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB · SAVED</small>
+              </button>
+              {canImport && <button className="removeModel" disabled={removingId === model.id} aria-label={`Remove ${model.name} from library`} onClick={() => removeSavedModel(model)}>{removingId === model.id ? "REMOVING…" : "REMOVE"}</button>}
+            </div>) : <div className="emptyLibrary">Your saved models will appear here.</div>}
           </div></>}
           {studioMode && canImport && <div className="uploadCard">
             <span>ADD TO LIBRARY</span><strong>{uploadedName || "Upload a model"}</strong><p>GLB or GLTF, up to 100 MB. Uploaded models are saved for visitors to view.</p>
