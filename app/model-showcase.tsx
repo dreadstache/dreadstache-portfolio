@@ -6,9 +6,9 @@ import React, { ChangeEvent, useEffect, useMemo, useRef, useState } from "react"
 type SavedModel = { id: string; name: string; size: number; uploadedAt: string; url: string };
 
 const pieces = [
-  { title: "Arkane Face I", kind: "Character / 3D Scan", file: "arkaneface1.glb", polys: "ORIGINAL SCAN", src: "/api/models/1784245710547-4c52747f-35e4-49b5-b684-0bfbc6955d69-arkaneface1.glb", camera: "0deg 75deg 2.4m" },
-  { title: "Arkane Face II", kind: "Character / 3D Scan", file: "arkaneface2.glb", polys: "ORIGINAL SCAN", src: "/api/models/1784246818750-2331df04-f836-40ae-9f85-1563f0104c48-arkaneface2.glb", camera: "20deg 75deg 2.4m" },
-  { title: "Arkane Face III", kind: "Character / 3D Scan", file: "arkaneface3.glb", polys: "ORIGINAL SCAN", src: "/api/models/1784245715831-b83bfd3b-c6c7-484e-a41c-8e78be8880cc-arkaneface3.glb", camera: "-20deg 75deg 2.4m" },
+  { title: "Arkane Face I", kind: "Character / 3D Scan", file: "arkaneface1.glb", polys: "ORIGINAL SCAN", src: "/api/models/1784417087598-d90cf37c-bbf3-4c13-95dc-a926a3aeb9e0-arkaneface1.glb", camera: "0deg 75deg 2.4m" },
+  { title: "Arkane Face II", kind: "Character / 3D Scan", file: "arkaneface2.glb", polys: "ORIGINAL SCAN", src: "/api/models/1784416637041-74b4482d-3272-4e33-98fd-64f9d729be0d-arkaneface2.glb", camera: "20deg 75deg 2.4m" },
+  { title: "Arkane Face III", kind: "Character / 3D Scan", file: "arkaneface3.glb", polys: "ORIGINAL SCAN", src: "/api/models/1784417768792-057e6fc8-ca6a-4ddc-b5e3-df1df0198a2f-arkaneface3.glb", camera: "-20deg 75deg 2.4m" },
 ];
 
 const presets = [
