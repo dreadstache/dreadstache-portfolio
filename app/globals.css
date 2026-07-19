@@ -126,6 +126,28 @@ input[type=range]::-webkit-slider-thumb { appearance:none; width:11px; height:11
 .saveNote span { color:#777; font:8px DM Mono; letter-spacing:.13em; }
 footer { min-height:90px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; padding:0 26px; color:#646663; font:8px DM Mono; letter-spacing:.12em; }
 footer p { font:10px Manrope; letter-spacing:0; }
+.aboutPage { min-height:100vh; background:#0c0b0c; }
+.aboutHero { min-height:520px; position:relative; overflow:hidden; display:grid; grid-template-columns:190px minmax(0,1fr) 300px; align-items:center; padding:55px clamp(28px,6vw,90px); border-bottom:1px solid var(--line); background:radial-gradient(circle at 78% 36%,#ff2f7525,transparent 30%),linear-gradient(135deg,#151214,#0c0b0c 62%); }
+.aboutIndex { align-self:start; color:var(--acid); font:9px DM Mono; letter-spacing:.18em; }
+.aboutIntro { position:relative; z-index:2; }
+.eyebrow { color:#8b8589; font:9px DM Mono; letter-spacing:.19em; }
+.aboutIntro h1 { margin:24px 0 28px; font:500 clamp(54px,8vw,118px)/.82 Syne; letter-spacing:-.065em; }
+.aboutLead { max-width:570px; color:#aaa4a8; font:clamp(16px,2vw,23px)/1.5 Manrope; }
+.aboutMark { width:190px; height:190px; display:grid; place-items:center; justify-self:center; color:#f1e9ed; font:500 92px Syne; text-indent:16px; position:relative; }
+.aboutMark::before { content:""; position:absolute; inset:28px; border:1px solid #ff2f7588; transform:rotate(45deg); box-shadow:0 0 55px #ff2f7522; }
+.aboutGrid { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--line); }
+.aboutGrid article { min-height:350px; padding:42px clamp(25px,3vw,48px); border-right:1px solid var(--line); }
+.aboutGrid article:last-child { border-right:0; }
+.aboutGrid article>span { color:var(--acid); font:8px DM Mono; letter-spacing:.17em; }
+.aboutGrid h2 { margin:32px 0 22px; font:500 clamp(20px,2vw,32px)/1.08 Syne; letter-spacing:-.025em; }
+.aboutGrid p { color:#817c80; font:13px/1.8 Manrope; }
+.contactCard { background:linear-gradient(145deg,#191417,#100f10); }
+.contactCard a { display:flex; justify-content:space-between; margin-top:35px; padding:16px 0; border-top:1px solid #4b3840; border-bottom:1px solid #4b3840; color:#eee8eb; text-decoration:none; font:11px DM Mono; letter-spacing:.08em; }
+.contactCard a b { color:var(--acid); }
+.aboutPage footer a { color:#777; text-decoration:none; font:8px DM Mono; letter-spacing:.12em; }
+.aboutPage footer a:hover { color:var(--acid); }
 @media (max-width:1000px) { .topbar { grid-template-columns:1fr 1fr; } nav { display:none; } .workspace { grid-template-columns:230px 1fr; } .controls { grid-column:1/-1; border-left:0; border-top:1px solid var(--line); display:grid; grid-template-columns:repeat(2,1fr); gap:18px 32px; padding-bottom:25px; } .controls>.sectionLabel,.tabs,.saveNote { grid-column:1/-1; position:static; } .presets { grid-column:1/-1; } .bottomLibraryWorkspace { display:flex; flex-direction:column; } .bottomLibraryWorkspace .stage { order:1; } .bottomLibraryWorkspace .controls { order:2; } .bottomLibraryWorkspace .collection { order:3; grid-template-columns:130px minmax(0,1fr); } .studioWorkspace .uploadCard { grid-column:1/-1; } }
+@media (max-width:1000px) { .aboutHero { grid-template-columns:1fr 180px; } .aboutIndex { grid-column:1/-1; } .aboutGrid { grid-template-columns:1fr; } .aboutGrid article { min-height:0; border-right:0; border-bottom:1px solid var(--line); } }
 @media (max-width:680px) { .topbar { height:70px; padding:0 14px; grid-template-columns:1fr auto; } .brandmark { width:29px; height:29px; } .techLink { padding:10px; font-size:8px; } .workspace { display:flex; flex-direction:column; } .stage { order:1; min-height:62vh; } .collection { order:2; border-right:0; border-top:1px solid var(--line); } .controls { order:3; display:block; } .control { margin:20px 0 26px; } .saveNote { margin-top:30px; } .pieceList { display:flex; overflow:auto; } .publicModelList { max-height:none; } .piece { min-width:220px; } .bottomLibraryWorkspace .collection { display:block; } .bottomLibraryWorkspace .sectionLabel { padding-bottom:14px; border-right:0; border-bottom:1px solid var(--line); } .studioLibraryBar { margin-top:14px; } .modelTitle h1 { font-size:29px; max-width:250px; } .viewportHint { display:none; } footer { text-align:center; } footer span { display:none; } }
+@media (max-width:680px) { .aboutHero { min-height:560px; display:block; padding:45px 22px; } .aboutIntro { margin-top:65px; } .aboutIntro h1 { font-size:54px; } .aboutMark { position:absolute; width:120px; height:120px; right:12px; top:42px; font-size:54px; opacity:.35; } .aboutGrid article { padding:34px 24px; } .aboutPage footer a { display:none; } }
 @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto !important; } }
