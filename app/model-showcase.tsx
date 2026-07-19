@@ -162,7 +162,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
               <button className="savedSelect" onClick={() => selectSavedModel(model)}>
                 <span className="savedGlyph">{String(index + 1).padStart(2, "0")}</span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB · {studioMode ? "SAVED" : "VIEW"}</small>
               </button>
-              {canImport && <button className="removeModel" disabled={removingId === model.id} aria-label={`Remove ${model.name} from library`} onClick={() => removeSavedModel(model)}>{removingId === model.id ? "REMOVING…" : "REMOVE"}</button>}
+              {studioMode && canImport && <button className="removeModel" disabled={removingId === model.id} aria-label={`Remove ${model.name} from library`} onClick={() => removeSavedModel(model)}>{removingId === model.id ? "REMOVING…" : "REMOVE"}</button>}
             </div>) : <div className="emptyLibrary">{studioMode ? "Your saved models will appear here." : "The next collection is being prepared."}</div>}
           </div></>
           {studioMode && canImport && <div className="uploadCard">
