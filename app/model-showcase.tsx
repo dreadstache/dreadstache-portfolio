@@ -189,7 +189,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     <main>
       <Script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js" />
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="DREADSTACHE portfolio home"><span className="brandmark">D</span><span>DREADSTACHE<br/><small>{studioMode ? "OWNER MODEL STUDIO" : "GAMES / FILM PORTFOLIO"}</small></span></a>
+        <a className="brand" href="#top" aria-label="Lucien Marcel Cote portfolio home"><span className="brandmark">L</span><span>LUCIEN MARCEL COTE<br/><small>{studioMode ? "OWNER MODEL STUDIO" : "GAMES / FILM PORTFOLIO"}</small></span></a>
         <nav aria-label="Primary"><a className="active" href="#viewer">VIEWER</a><a href="#collection">COLLECTION</a><a href="#about">ABOUT</a></nav>
         {studioMode && canImport && <label className="uploadButton">+ IMPORT MODEL<input type="file" accept=".glb,.gltf,model/gltf-binary,model/gltf+json" onChange={uploadModel}/></label>}
       </header>
@@ -251,10 +251,10 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
             <button className="fullButton" onClick={() => setRotate(!rotate)}>{rotate ? "PAUSE TURNTABLE" : "START TURNTABLE"}</button>
             <button className="fullButton" onClick={() => setWireframe(!wireframe)}>{wireframe ? "HIDE EDGE STUDY" : "SHOW EDGE STUDY"}</button>
           </>}
-          <div className="saveNote"><span>{studioMode ? "OWNER REVIEW WORKSPACE" : "CLIENT SHOWCASE"}</span><p>{studioMode ? "Uploaded models remain available in your private evaluation library." : "A curated presentation of selected DREADSTACHE artwork."}</p></div>
+          <div className="saveNote"><span>{studioMode ? "OWNER REVIEW WORKSPACE" : "CLIENT SHOWCASE"}</span><p>{studioMode ? "Uploaded models remain available in your private evaluation library." : "A curated presentation of selected Lucien Marcel Cote artwork."}</p></div>
         </aside>
       </section>
-      <footer id="about"><span>DREADSTACHE / 2026</span><p>A focused showcase for original game and film development artwork.</p><span>GAMES / FILM PORTFOLIO</span></footer>
+      <footer id="about"><span>LUCIEN MARCEL COTE / 2026</span><p>A focused showcase for original game and film development artwork.</p><span>GAMES / FILM PORTFOLIO</span></footer>
     </main>
   );
 }

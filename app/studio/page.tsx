@@ -13,7 +13,7 @@ export default async function StudioPage() {
       <main style={{ minHeight: "100vh", display: "grid", placeItems: "center", padding: "2rem" }}>
         <section style={{ maxWidth: "34rem", textAlign: "center" }}>
           <h1>Owner studio</h1>
-          <p>This workspace is reserved for the DREADSTACHE portfolio owner.</p>
+          <p>This workspace is reserved for Lucien Marcel Cote.</p>
           <a href="/">Return to the client showcase</a>
         </section>
       </main>
