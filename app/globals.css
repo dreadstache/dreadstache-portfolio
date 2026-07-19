@@ -141,6 +141,8 @@ footer p { font:10px Manrope; letter-spacing:0; }
 .aboutGrid article>span { color:var(--acid); font:8px DM Mono; letter-spacing:.17em; }
 .aboutGrid h2 { margin:32px 0 22px; font:500 clamp(20px,2vw,32px)/1.08 Syne; letter-spacing:-.025em; }
 .aboutGrid p { color:#817c80; font:13px/1.8 Manrope; }
+.aboutGrid p a { color:#d9cfd4; text-decoration-color:var(--acid); text-underline-offset:3px; }
+.aboutGrid p a:hover { color:var(--acid); }
 .contactCard { background:linear-gradient(145deg,#191417,#100f10); }
 .contactCard a { display:flex; justify-content:space-between; margin-top:35px; padding:16px 0; border-top:1px solid #4b3840; border-bottom:1px solid #4b3840; color:#eee8eb; text-decoration:none; font:11px DM Mono; letter-spacing:.08em; }
 .contactCard a b { color:var(--acid); }

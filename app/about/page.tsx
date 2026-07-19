@@ -32,10 +32,17 @@ export default function AboutPage() {
           <span>01 / PROFILE</span>
           <h2>BUILDING WORLDS WITH A TECHNICAL EYE.</h2>
           <p>
-            Lucien Marcel Cote creates 3D artwork and interactive experiences
-            for games, film, and emerging media. His practice combines digital
-            sculpture, scanning, visual development, and real-time tools to turn
-            physical ideas into expressive virtual work.
+            Lucien Marcel Cote is a multidisciplinary game developer, 3D artist,
+            and educator whose work spans Unreal Engine, Unity, gameplay
+            programming, technical art, photogrammetry, digital sculpture, and
+            real-time experiences for games and film. Alongside creative
+            production, he brings deep experience in data analysis, SQL,
+            database management, reporting, and business intelligence—using
+            analytical rigor to build clearer systems and better decisions. In
+            music, he writes and produces as{" "}
+            <a href="https://dreadstache.com" target="_blank" rel="noreferrer">Dreadstache</a>,
+            an electronic alter ego where sound design, performance, and
+            technology collide.
           </p>
         </article>
         <article>
