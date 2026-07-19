@@ -39,6 +39,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   const [loadProgress, setLoadProgress] = useState(0);
   const objectUrl = useRef<string | null>(null);
   const carouselRef = useRef<HTMLDivElement | null>(null);
+  const viewerRef = useRef<HTMLElement | null>(null);
   const piece = pieces[active];
 
   useEffect(() => {
@@ -56,6 +57,31 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
         }
       })
       .catch(() => setUploadMessage("Showcase library is temporarily unavailable."));
+  }, []);
+
+  useEffect(() => {
+    const viewer = viewerRef.current;
+    if (!viewer) return;
+
+    const finishLoading = () => {
+      setLoadProgress(1);
+      setIsModelLoading(false);
+    };
+    const updateProgress = (event: Event) => {
+      const nextProgress = (event as CustomEvent<{ totalProgress?: number }>).detail?.totalProgress;
+      if (typeof nextProgress !== "number") return;
+      setLoadProgress(nextProgress);
+      if (nextProgress >= 0.999) finishLoading();
+    };
+
+    viewer.addEventListener("load", finishLoading);
+    viewer.addEventListener("progress", updateProgress);
+    viewer.addEventListener("error", finishLoading);
+    return () => {
+      viewer.removeEventListener("load", finishLoading);
+      viewer.removeEventListener("progress", updateProgress);
+      viewer.removeEventListener("error", finishLoading);
+    };
   }, []);
 
   const glow = useMemo(() => ({
@@ -141,6 +167,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   }
 
   const viewerProps: Record<string, unknown> = {
+    ref: viewerRef,
     src: modelSrc,
     alt: `Interactive 3D view of ${uploadedName || piece.title}`,
     "camera-controls": true,
@@ -150,12 +177,6 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     "camera-orbit": piece.camera,
     "environment-image": "neutral",
     "interaction-prompt": "none",
-    onLoad: () => { setLoadProgress(1); setIsModelLoading(false); },
-    onError: () => setIsModelLoading(false),
-    onProgress: (event: CustomEvent<{ totalProgress?: number }>) => {
-      const nextProgress = event.detail?.totalProgress;
-      if (typeof nextProgress === "number") setLoadProgress(nextProgress);
-    },
     ...(rotate ? { "auto-rotate": true, "rotation-per-second": "12deg" } : {}),
   };
 
