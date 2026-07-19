@@ -35,6 +35,8 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   const [uploadState, setUploadState] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [uploadMessage, setUploadMessage] = useState("");
   const [removingId, setRemovingId] = useState("");
+  const [isModelLoading, setIsModelLoading] = useState(true);
+  const [loadProgress, setLoadProgress] = useState(0);
   const objectUrl = useRef<string | null>(null);
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const piece = pieces[active];
@@ -47,6 +49,8 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
         setCanImport(data.canImport);
         if (!studioMode && data.models.length) {
           setActive(0);
+          setIsModelLoading(true);
+          setLoadProgress(0);
           setModelSrc(data.models[0].url);
           setUploadedName(data.models[0].name);
         }
@@ -60,6 +64,8 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
 
   function selectPiece(index: number) {
     setActive(index);
+    setIsModelLoading(true);
+    setLoadProgress(0);
     setModelSrc(pieces[index].src);
     setUploadedName("");
   }
@@ -72,6 +78,8 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     }
     if (objectUrl.current) URL.revokeObjectURL(objectUrl.current);
     objectUrl.current = URL.createObjectURL(file);
+    setIsModelLoading(true);
+    setLoadProgress(0);
     setModelSrc(objectUrl.current);
     setUploadedName(file.name);
     setUploadState("saving"); setUploadMessage("Saving model to the shared library…");
@@ -95,6 +103,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   }
 
   function selectSavedModel(model: SavedModel) {
+    setIsModelLoading(true); setLoadProgress(0);
     setActive(0); setModelSrc(model.url); setUploadedName(model.name);
     setUploadState("saved"); setUploadMessage("Viewing a saved library model.");
   }
@@ -131,7 +140,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     setLightColor(preset.color); setBackground(preset.bg);
   }
 
-  const viewerProps: Record<string, string | boolean | number> = {
+  const viewerProps: Record<string, unknown> = {
     src: modelSrc,
     alt: `Interactive 3D view of ${uploadedName || piece.title}`,
     "camera-controls": true,
@@ -141,6 +150,12 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     "camera-orbit": piece.camera,
     "environment-image": "neutral",
     "interaction-prompt": "none",
+    onLoad: () => { setLoadProgress(1); setIsModelLoading(false); },
+    onError: () => setIsModelLoading(false),
+    onProgress: (event: CustomEvent<{ totalProgress?: number }>) => {
+      const nextProgress = event.detail?.totalProgress;
+      if (typeof nextProgress === "number") setLoadProgress(nextProgress);
+    },
     ...(rotate ? { "auto-rotate": true, "rotation-per-second": "12deg" } : {}),
   };
 
@@ -183,6 +198,12 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
           <div className="stageGlow" style={glow}/>
           <div className={wireframe ? "viewerWrap wireframe" : "viewerWrap"}>
             {React.createElement("model-viewer", viewerProps)}
+          </div>
+          <div className={isModelLoading ? "modelLoader isVisible" : "modelLoader"} aria-live="polite" aria-hidden={!isModelLoading}>
+            <div className="loaderRing"><span/></div>
+            <strong>LOADING MODEL</strong>
+            <div className="loaderTrack"><span style={{ width: `${Math.max(4, Math.round(loadProgress * 100))}%` }}/></div>
+            <small>{Math.round(loadProgress * 100)}% · PREPARING 3D VIEW</small>
           </div>
           <div className="stageTop"><span className="statusDot"/> LIVE VIEWPORT <span className="divider"/> {uploadedName || piece.file}</div>
           <div className="viewportHint">DRAG TO ORBIT <span>•</span> SCROLL TO ZOOM</div>
