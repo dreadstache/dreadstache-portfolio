@@ -25,7 +25,7 @@ nav a.active, nav a:hover { color:var(--ink); border-bottom-color:var(--acid); }
 .sectionLabel { font:9px DM Mono; letter-spacing:.16em; color:#aaa; display:flex; gap:10px; padding-bottom:22px; border-bottom:1px solid var(--line); }
 .sectionLabel span { color:var(--acid); }
 .pieceList { padding-top:14px; }
-.publicModelList { max-height:560px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--acid) #242124; padding-right:5px; }
+.publicModelList { max-height:638px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:var(--acid) #242124; padding-right:5px; }
 .publicModelList::-webkit-scrollbar { width:5px; }
 .publicModelList::-webkit-scrollbar-track { background:#242124; }
 .publicModelList::-webkit-scrollbar-thumb { background:var(--acid); }
