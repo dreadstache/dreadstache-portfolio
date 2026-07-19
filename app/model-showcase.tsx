@@ -194,23 +194,18 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
         {studioMode && canImport && <label className="uploadButton">+ IMPORT MODEL<input type="file" accept=".glb,.gltf,model/gltf-binary,model/gltf+json" onChange={uploadModel}/></label>}
       </header>
 
-      <section id="viewer" className={studioMode ? "workspace studioWorkspace" : "workspace"}>
+      <section id="viewer" className={studioMode ? "workspace bottomLibraryWorkspace studioWorkspace" : "workspace bottomLibraryWorkspace publicWorkspace"}>
         <aside className="collection" id="collection">
           <div className="sectionLabel"><span>01</span> {studioMode ? "MODEL LIBRARY" : "SELECT MODEL"}</div>
-          {!studioMode && <div className="pieceList publicModelList">
-            {savedModels.length ? savedModels.map((model, index) => <button key={model.id} className={modelSrc === model.url ? "piece activePiece" : "piece"} onClick={() => selectSavedModel(model)}>
-              <span className="thumb">{String(index + 1).padStart(2, "0")}</span><span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB</small></span><i>↗</i>
-            </button>) : <div className="emptyLibrary">The next collection is being prepared.</div>}
-          </div>}
-          {studioMode && <div className="studioLibraryBar"><div className="libraryHead"><span>SAVED MODELS</span><div><button aria-label="Previous saved models" onClick={() => moveCarousel(-1)}>←</button><button aria-label="Next saved models" onClick={() => moveCarousel(1)}>→</button></div></div>
-          <div className="modelCarousel" ref={carouselRef} aria-label="Saved model row">
+          <div className="studioLibraryBar"><div className="libraryHead"><span>{studioMode ? "SAVED MODELS" : "SHOWCASE MODELS"}</span><div><button aria-label="Previous models" onClick={() => moveCarousel(-1)}>←</button><button aria-label="Next models" onClick={() => moveCarousel(1)}>→</button></div></div>
+          <div className="modelCarousel" ref={carouselRef} aria-label={studioMode ? "Saved model row" : "Showcase model row"}>
             {savedModels.length ? savedModels.map((model, index) => <div key={model.id} className={modelSrc === model.url ? "savedCard selectedCard" : "savedCard"}>
               <button className="savedSelect" onClick={() => selectSavedModel(model)}>
-                <span className="savedGlyph">{String(index + 1).padStart(2, "0")}</span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB · SAVED</small>
+                <span className="savedGlyph">{String(index + 1).padStart(2, "0")}</span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB · {studioMode ? "SAVED" : "VIEW"}</small>
               </button>
               {studioMode && canImport && <button className="removeModel" disabled={removingId === model.id} aria-label={`Remove ${model.name} from library`} onClick={() => removeSavedModel(model)}>{removingId === model.id ? "REMOVING…" : "REMOVE"}</button>}
-            </div>) : <div className="emptyLibrary">Your saved models will appear here.</div>}
-          </div></div>}
+            </div>) : <div className="emptyLibrary">{studioMode ? "Your saved models will appear here." : "The next collection is being prepared."}</div>}
+          </div></div>
           {studioMode && canImport && <div className="uploadCard">
             <span>ADD TO LIBRARY</span><strong>{uploadedName || "Upload a model"}</strong><p>GLB or GLTF, up to 100 MB. Uploaded models are saved for visitors to view.</p>
             <label className={uploadState === "saving" ? "isSaving" : ""}>{uploadState === "saving" ? "SAVING…" : "CHOOSE & SAVE FILE"}<input disabled={uploadState === "saving"} type="file" accept=".glb,.gltf" onChange={uploadModel}/></label>
