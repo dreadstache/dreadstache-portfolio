@@ -40,15 +40,14 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   const piece = pieces[active];
 
   useEffect(() => {
-    if (!studioMode) return;
     fetch("/api/models")
       .then((response) => response.ok ? response.json() : Promise.reject())
       .then((data: { models: SavedModel[]; canImport: boolean }) => {
         setSavedModels(data.models);
         setCanImport(data.canImport);
       })
-      .catch(() => setUploadMessage("Saved library is temporarily unavailable."));
-  }, [studioMode]);
+      .catch(() => setUploadMessage("Showcase library is temporarily unavailable."));
+  }, []);
 
   const glow = useMemo(() => ({
     background: `radial-gradient(circle at ${lightX}% ${lightY}%, ${lightColor}66 0, ${lightColor}18 20%, transparent 47%)`,
@@ -157,15 +156,15 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
               <span className="thumb">0{index + 1}</span><span><strong>{item.title}</strong><small>{item.kind}</small></span><i>↗</i>
             </button>)}
           </div>
-          {studioMode && <><div className="libraryHead"><span>SAVED LIBRARY</span><div><button aria-label="Previous saved models" onClick={() => moveCarousel(-1)}>←</button><button aria-label="Next saved models" onClick={() => moveCarousel(1)}>→</button></div></div>
-          <div className="modelCarousel" ref={carouselRef} aria-label="Saved model carousel">
+          <><div className="libraryHead"><span>{studioMode ? "SAVED LIBRARY" : "SHOWCASE LIBRARY"}</span><div><button aria-label="Previous saved models" onClick={() => moveCarousel(-1)}>←</button><button aria-label="Next saved models" onClick={() => moveCarousel(1)}>→</button></div></div>
+          <div className="modelCarousel" ref={carouselRef} aria-label={studioMode ? "Saved model carousel" : "Public showcase model carousel"}>
             {savedModels.length ? savedModels.map((model, index) => <div key={model.id} className={modelSrc === model.url ? "savedCard selectedCard" : "savedCard"}>
               <button className="savedSelect" onClick={() => selectSavedModel(model)}>
-                <span className="savedGlyph">{String(index + 1).padStart(2, "0")}</span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB · SAVED</small>
+                <span className="savedGlyph">{String(index + 1).padStart(2, "0")}</span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB · {studioMode ? "SAVED" : "VIEW"}</small>
               </button>
               {canImport && <button className="removeModel" disabled={removingId === model.id} aria-label={`Remove ${model.name} from library`} onClick={() => removeSavedModel(model)}>{removingId === model.id ? "REMOVING…" : "REMOVE"}</button>}
-            </div>) : <div className="emptyLibrary">Your saved models will appear here.</div>}
-          </div></>}
+            </div>) : <div className="emptyLibrary">{studioMode ? "Your saved models will appear here." : "The next collection is being prepared."}</div>}
+          </div></>
           {studioMode && canImport && <div className="uploadCard">
             <span>ADD TO LIBRARY</span><strong>{uploadedName || "Upload a model"}</strong><p>GLB or GLTF, up to 100 MB. Uploaded models are saved for visitors to view.</p>
             <label className={uploadState === "saving" ? "isSaving" : ""}>{uploadState === "saving" ? "SAVING…" : "CHOOSE & SAVE FILE"}<input disabled={uploadState === "saving"} type="file" accept=".glb,.gltf" onChange={uploadModel}/></label>
