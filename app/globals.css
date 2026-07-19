@@ -105,6 +105,7 @@ model-viewer { width:100%; height:100%; --poster-color:transparent; background:t
 .tabs button { padding:11px; border:0; border-bottom:1px solid transparent; color:#696b68; background:none; font:9px DM Mono; letter-spacing:.14em; cursor:pointer; }
 .tabs .selected { color:var(--ink); border-color:var(--acid); }
 .control { margin:0 0 24px; }
+.controls>.sectionLabel + .control { margin-top:24px; }
 .control>div { display:flex; justify-content:space-between; font:8px DM Mono; letter-spacing:.1em; color:#a0a29e; margin-bottom:11px; }
 .control output { color:var(--acid); }
 input[type=range] { appearance:none; width:100%; height:2px; background:#413e41; }

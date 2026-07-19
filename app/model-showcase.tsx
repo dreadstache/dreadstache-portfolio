@@ -28,8 +28,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   const [lightX, setLightX] = useState(38);
   const [lightY, setLightY] = useState(22);
   const [rotate, setRotate] = useState(true);
-  const [wireframe, setWireframe] = useState(false);
-  const [panel, setPanel] = useState<"light" | "model">("light");
+  const [wireframe, setWireframe] = useState(true);
   const [savedModels, setSavedModels] = useState<SavedModel[]>([]);
   const [canImport, setCanImport] = useState(false);
   const [uploadState, setUploadState] = useState<"idle" | "saving" | "saved" | "error">("idle");
@@ -232,20 +231,13 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
 
         <aside className="controls">
           <div className="sectionLabel"><span>02</span> SCENE SETTINGS</div>
-          <div className="tabs"><button className={panel === "light" ? "selected" : ""} onClick={() => setPanel("light")}>LIGHT</button><button className={panel === "model" ? "selected" : ""} onClick={() => setPanel("model")}>MODEL</button></div>
-          {panel === "light" ? <>
-            <Control label="EXPOSURE" value={exposure} min={0.2} max={2} step={0.05} setValue={setExposure}/>
-            <Control label="SHADOW" value={shadow} min={0} max={2} step={0.05} setValue={setShadow}/>
-            <Control label="LIGHT X" value={lightX} min={0} max={100} step={1} setValue={setLightX}/>
-            <Control label="LIGHT Y" value={lightY} min={0} max={100} step={1} setValue={setLightY}/>
-            <div className="colorRow"><label>LIGHT COLOR</label><input aria-label="Light color" type="color" value={lightColor} onChange={e => setLightColor(e.target.value)}/><code>{lightColor.toUpperCase()}</code></div>
-            <div className="colorRow"><label>BACKDROP</label><input aria-label="Backdrop color" type="color" value={background} onChange={e => setBackground(e.target.value)}/><code>{background.toUpperCase()}</code></div>
-            <div className="presets"><label>LIGHTING PRESETS</label>{presets.map(p => <button key={p.name} onClick={() => applyPreset(p)}><span style={{background:p.color}}/>{p.name}</button>)}</div>
-          </> : <>
-            <div className="modelPanel"><label>ACTIVE ASSET</label><strong>{uploadedName || piece.file}</strong><p>Physically based materials and embedded animation are preserved by the viewer.</p></div>
-            <button className="fullButton" onClick={() => setRotate(!rotate)}>{rotate ? "PAUSE TURNTABLE" : "START TURNTABLE"}</button>
-            <button className="fullButton" onClick={() => setWireframe(!wireframe)}>{wireframe ? "HIDE EDGE STUDY" : "SHOW EDGE STUDY"}</button>
-          </>}
+          <Control label="EXPOSURE" value={exposure} min={0.2} max={2} step={0.05} setValue={setExposure}/>
+          <Control label="SHADOW" value={shadow} min={0} max={2} step={0.05} setValue={setShadow}/>
+          <Control label="LIGHT X" value={lightX} min={0} max={100} step={1} setValue={setLightX}/>
+          <Control label="LIGHT Y" value={lightY} min={0} max={100} step={1} setValue={setLightY}/>
+          <div className="colorRow"><label>LIGHT COLOR</label><input aria-label="Light color" type="color" value={lightColor} onChange={e => setLightColor(e.target.value)}/><code>{lightColor.toUpperCase()}</code></div>
+          <div className="colorRow"><label>BACKDROP</label><input aria-label="Backdrop color" type="color" value={background} onChange={e => setBackground(e.target.value)}/><code>{background.toUpperCase()}</code></div>
+          <div className="presets"><label>LIGHTING PRESETS</label>{presets.map(p => <button key={p.name} onClick={() => applyPreset(p)}><span style={{background:p.color}}/>{p.name}</button>)}</div>
           <div className="saveNote"><span>{studioMode ? "OWNER REVIEW WORKSPACE" : "CLIENT SHOWCASE"}</span><p>{studioMode ? "Uploaded models remain available in your private evaluation library." : "A curated presentation of selected Lucien Marcel Cote artwork."}</p></div>
         </aside>
       </section>
