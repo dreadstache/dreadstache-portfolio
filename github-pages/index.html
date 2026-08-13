@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lucien Marcel Cote's interactive games, film, and 3D portfolio.">
+    <title>Lucien Marcel Cote | Games, Film & 3D</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>L</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;600&family=Syne:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js"></script>
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <main id="top">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="Lucien Marcel Cote portfolio home">
+          <span class="brandmark">L</span>
+          <span>LUCIEN MARCEL COTE<br><small>GAMES / FILM PORTFOLIO</small></span>
+        </a>
+        <nav aria-label="Primary">
+          <a class="active" href="#viewer">VIEWER</a>
+          <a href="#collection">COLLECTION</a>
+          <a href="#about">ABOUT</a>
+        </nav>
+        <details class="workSwitcher">
+          <summary>EXPLORE WORK <span aria-hidden="true">▾</span></summary>
+          <div class="workSwitcherMenu">
+            <p><strong>LUC COTE</strong><span>ONE PRACTICE, SEVERAL WAYS IN.</span></p>
+            <div id="work-links"></div>
+          </div>
+        </details>
+      </header>
+
+      <section id="viewer" class="workspace bottomLibraryWorkspace publicWorkspace">
+        <aside class="collection" id="collection">
+          <div class="sectionLabel"><span>01</span> SELECT MODEL</div>
+          <div class="studioLibraryBar">
+            <div class="libraryHead"><span>SHOWCASE MODELS</span><div><button id="models-prev" aria-label="Previous models">←</button><button id="models-next" aria-label="Next models">→</button></div></div>
+            <div class="modelCarousel" id="model-list" aria-label="Showcase model row"><div class="emptyLibrary">Loading the collection…</div></div>
+          </div>
+        </aside>
+
+        <section class="stage" id="stage">
+          <div class="stageGlow" id="stage-glow"></div>
+          <div class="viewerWrap wireframe" id="viewer-wrap">
+            <model-viewer id="model-viewer" alt="Interactive 3D portfolio model" camera-controls touch-action="pan-y" shadow-intensity="2" exposure="0.2" environment-image="neutral" interaction-prompt="none" auto-rotate rotation-per-second="12deg"></model-viewer>
+          </div>
+          <div class="modelLoader isVisible" id="model-loader" aria-live="polite">
+            <div class="loaderRing"><span></span></div><strong>LOADING MODEL</strong>
+            <div class="loaderTrack"><span id="loader-progress" style="width:4%"></span></div>
+            <small id="loader-copy">0% · PREPARING 3D VIEW</small>
+          </div>
+          <div class="stageTop"><span class="statusDot"></span> LIVE VIEWPORT <span class="divider"></span> <span id="model-file">SELECT A MODEL</span></div>
+          <div class="viewportHint">DRAG TO ORBIT <span>•</span> SCROLL TO ZOOM</div>
+          <div class="modelTitle"><span>INTERACTIVE 3D COLLECTION</span><h1 id="model-title">LUCIEN MARCEL COTE</h1><p id="model-meta">CURATED SHOWCASE</p></div>
+          <div class="stageActions"><button id="toggle-rotate" class="isOn">↻ AUTO ROTATE</button><button id="toggle-edges" class="isOn">◇ EDGES</button></div>
+        </section>
+
+        <aside class="controls">
+          <div class="sectionLabel"><span>02</span> SCENE SETTINGS</div>
+          <div class="control"><div><label for="exposure">EXPOSURE</label><output id="exposure-output">0.20</output></div><input id="exposure" type="range" min="0.2" max="2" step="0.05" value="0.2"></div>
+          <div class="control"><div><label for="shadow">SHADOW</label><output id="shadow-output">2.00</output></div><input id="shadow" type="range" min="0" max="2" step="0.05" value="2"></div>
+          <div class="control"><div><label for="light-x">LIGHT X</label><output id="light-x-output">38</output></div><input id="light-x" type="range" min="0" max="100" value="38"></div>
+          <div class="control"><div><label for="light-y">LIGHT Y</label><output id="light-y-output">22</output></div><input id="light-y" type="range" min="0" max="100" value="22"></div>
+          <div class="colorRow"><label for="light-color">LIGHT COLOR</label><input id="light-color" type="color" value="#ff2f75"><code id="light-color-output">#FF2F75</code></div>
+          <div class="colorRow"><label for="backdrop">BACKDROP</label><input id="backdrop" type="color" value="#3b0814"><code id="backdrop-output">#3B0814</code></div>
+          <div class="presets"><label>LIGHTING PRESETS</label><button data-preset="crimson"><span style="background:#ff2f75"></span>Crimson</button><button data-preset="ember"><span style="background:#ff734c"></span>Ember</button><button data-preset="gallery"><span style="background:#fff5df"></span>Gallery</button></div>
+          <div class="saveNote"><span>CLIENT SHOWCASE</span><p>A curated presentation of selected Lucien Marcel Cote artwork.</p></div>
+        </aside>
+      </section>
+
+      <section id="about" class="aboutPage">
+        <section class="aboutHero">
+          <div class="aboutIndex">ABOUT / 01</div>
+          <div class="aboutIntro"><p class="eyebrow">ARTIST · DESIGNER · TECHNICAL CREATOR</p><h1>LUCIEN<br>MARCEL COTE</h1><p class="aboutLead">A multidisciplinary creator working where art, technology, and interactive storytelling meet.</p></div>
+          <div class="aboutMark" aria-hidden="true">L</div>
+        </section>
+        <section class="aboutGrid">
+          <article><span>01 / PROFILE</span><h2>BUILDING WORLDS WITH A TECHNICAL EYE.</h2><p>Game developer, 3D artist, and educator working across Unreal Engine, Unity, gameplay programming, technical art, photogrammetry, digital sculpture, and real-time experiences.</p></article>
+          <article><span>02 / PRACTICE</span><h2>FROM CAPTURE TO PRESENTATION.</h2><p>The work moves between artistic exploration and production: shaping models, developing technical workflows, and presenting finished assets in interactive contexts.</p></article>
+          <article class="contactCard"><span>03 / CONTACT</span><h2>LET'S MAKE SOMETHING MEMORABLE.</h2><p>For projects, collaborations, and portfolio inquiries:</p><a href="mailto:info@luccote.com">info@luccote.com <b>↗</b></a></article>
+        </section>
+      </section>
+
+      <footer><span>LUCIEN MARCEL COTE / 2026</span><p>Games, film, 3D art, and interactive development.</p><a href="#top">RETURN TO VIEWER ↑</a></footer>
+    </main>
+  </body>
+</html>

@@ -18,6 +18,9 @@ export async function GET(_request: Request, context: { params: Promise<{ id: st
   object.writeHttpMetadata(headers);
   headers.set("etag", object.httpEtag);
   headers.set("cache-control", "public, max-age=3600");
+  if (process.env.PUBLIC_MODEL_ACCESS === "enabled") {
+    headers.set("access-control-allow-origin", "*");
+  }
   headers.set("content-disposition", `inline; filename="${(object.customMetadata?.name || id).replace(/["\r\n]/g, "")}"`);
   return new Response(object.body, { headers });
 }

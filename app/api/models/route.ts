@@ -5,6 +5,14 @@ const MAX_BYTES = 100 * 1024 * 1024;
 const VALID_EXTENSIONS = new Set(["glb", "gltf"]);
 const OWNER_EMAIL = "lucmcote@gmail.com";
 
+function publicHeaders() {
+  const headers: Record<string, string> = { "cache-control": "public, max-age=60" };
+  if (process.env.PUBLIC_MODEL_ACCESS === "enabled") {
+    headers["access-control-allow-origin"] = "*";
+  }
+  return headers;
+}
+
 async function isOwner() {
   const user = await getChatGPTUser();
   return user?.email.toLowerCase() === OWNER_EMAIL;
@@ -22,7 +30,10 @@ export async function GET() {
     }))
     .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 
-  return Response.json({ models, canImport: await isOwner() });
+  return Response.json(
+    { models, canImport: await isOwner() },
+    { headers: publicHeaders() },
+  );
 }
 
 export async function POST(request: Request) {
