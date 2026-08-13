@@ -18,7 +18,7 @@ const fallbackDestinations: Destination[] = [
   { id: "resumes", label: "Résumé Library", description: "Focused, verified career stories.", url: "https://dreadstache.github.io/careeros/generated/resume/", status: "live" },
 ];
 
-export function WorkSwitcher({ current = "three-d" }: { current?: string }) {
+export function WorkSwitcher({ current = "three-d", archiveCurrent = false }: { current?: string; archiveCurrent?: boolean }) {
   const [destinations, setDestinations] = useState(fallbackDestinations);
 
   useEffect(() => {
@@ -42,6 +42,10 @@ export function WorkSwitcher({ current = "three-d" }: { current?: string }) {
               <span>{destination.description}</span>
             </a>
           ))}
+          <a href="/archive" aria-current={archiveCurrent ? "page" : undefined}>
+            <strong>The Archive</strong>
+            <span>Earlier work, production history, and creative foundations.</span>
+          </a>
         </div>
       </div>
     </details>
