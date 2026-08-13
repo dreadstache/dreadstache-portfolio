@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import { WorkSwitcher } from "./work-switcher";
 import React, { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 
 type SavedModel = { id: string; name: string; size: number; uploadedAt: string; url: string };
@@ -190,7 +191,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
       <header className="topbar">
         <a className="brand" href="#top" aria-label="Lucien Marcel Cote portfolio home"><span className="brandmark">L</span><span>LUCIEN MARCEL COTE<br/><small>{studioMode ? "OWNER MODEL STUDIO" : "GAMES / FILM PORTFOLIO"}</small></span></a>
         <nav aria-label="Primary"><a className="active" href="#viewer">VIEWER</a><a href="#collection">COLLECTION</a><a href="/about">ABOUT</a></nav>
-        <a className="techLink" href="https://www.luccote.com" target="_blank" rel="noreferrer">TECH SITE <span>↗</span></a>
+        <WorkSwitcher />
       </header>
 
       <section id="viewer" className={studioMode ? "workspace bottomLibraryWorkspace studioWorkspace" : "workspace bottomLibraryWorkspace publicWorkspace"}>

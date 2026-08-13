@@ -1,3 +1,5 @@
+import { WorkSwitcher } from "../work-switcher";
+
 export default function AboutPage() {
   return (
     <main className="aboutPage">
@@ -11,7 +13,7 @@ export default function AboutPage() {
           <a href="/#collection">COLLECTION</a>
           <a className="active" href="/about">ABOUT</a>
         </nav>
-        <a className="techLink" href="https://www.luccote.com" target="_blank" rel="noreferrer">TECH SITE <span>↗</span></a>
+        <WorkSwitcher />
       </header>
 
       <section className="aboutHero">

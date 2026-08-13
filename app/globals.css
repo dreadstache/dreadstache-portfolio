@@ -18,6 +18,20 @@ nav a.active, nav a:hover { color:var(--ink); border-bottom-color:var(--acid); }
 .techLink { justify-self:end; color:#aaa; border:1px solid #4c494c; padding:13px 17px; font:10px DM Mono; letter-spacing:.12em; text-decoration:none; }
 .techLink span { color:var(--acid); margin-left:6px; }
 .techLink:hover { border-color:var(--acid); color:var(--ink); }
+.workSwitcher { justify-self:end; position:relative; }
+.workSwitcher summary { color:#aaa; border:1px solid #4c494c; padding:13px 17px; font:10px DM Mono; letter-spacing:.12em; list-style:none; cursor:pointer; white-space:nowrap; }
+.workSwitcher summary::-webkit-details-marker { display:none; }
+.workSwitcher summary span { color:var(--acid); margin-left:6px; }
+.workSwitcher[open] summary,.workSwitcher summary:hover { border-color:var(--acid); color:var(--ink); }
+.workSwitcherMenu { position:absolute; top:calc(100% + 12px); right:0; z-index:20; width:min(360px,calc(100vw - 32px)); padding:14px; border:1px solid #3b383b; background:#121112; box-shadow:0 24px 70px #000a; }
+.workSwitcherMenu>p { display:grid; gap:4px; margin:0 0 10px; padding:2px 5px 12px; border-bottom:1px solid var(--line); font:10px DM Mono; letter-spacing:.12em; }
+.workSwitcherMenu>p span { color:var(--muted); font-size:8px; }
+.workSwitcherMenu>div { display:grid; gap:4px; }
+.workSwitcherMenu a { display:grid; gap:5px; padding:11px 12px; color:var(--ink); text-decoration:none; }
+.workSwitcherMenu a:hover { background:#1b181a; }
+.workSwitcherMenu a[aria-current="page"] { background:#21171b; box-shadow:inset 2px 0 0 var(--acid); }
+.workSwitcherMenu a strong { font:11px Syne; letter-spacing:.04em; }
+.workSwitcherMenu a span { color:var(--muted); font:8px DM Mono; letter-spacing:.04em; line-height:1.5; }
 .uploadCard input { display:none; }
 .workspace { min-height:calc(100vh - 84px); display:grid; grid-template-columns:290px minmax(420px,1fr) 310px; }
 .collection, .controls { background:var(--panel); padding:25px 20px; position:relative; z-index:3; }

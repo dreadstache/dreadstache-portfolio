@@ -1,0 +1,49 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+type Destination = {
+  id: string;
+  label: string;
+  description: string;
+  url: string;
+  status: string;
+};
+
+const ecosystemUrl = "https://dreadstache.github.io/careeros/generated/ecosystem.json";
+const fallbackDestinations: Destination[] = [
+  { id: "tech", label: "Tech & Systems", description: "Analytics, GIS, software, and automation.", url: "https://dreadstache.github.io/luccote-portfolio/", status: "live" },
+  { id: "three-d", label: "Games, Film & 3D", description: "Interactive models and technical art.", url: "https://vanta-model-atelier.dreadstache.chatgpt.site/", status: "live" },
+  { id: "music", label: "Music", description: "Dreadstache releases and production.", url: "https://dreadstache.com/", status: "live" },
+  { id: "resumes", label: "Résumé Library", description: "Focused, verified career stories.", url: "https://dreadstache.github.io/careeros/generated/resume/", status: "live" },
+];
+
+export function WorkSwitcher({ current = "three-d" }: { current?: string }) {
+  const [destinations, setDestinations] = useState(fallbackDestinations);
+
+  useEffect(() => {
+    fetch(ecosystemUrl, { cache: "no-store", headers: { Accept: "application/json" } })
+      .then(response => response.ok ? response.json() : Promise.reject())
+      .then(manifest => {
+        if (Array.isArray(manifest.destinations)) setDestinations(manifest.destinations);
+      })
+      .catch(() => undefined);
+  }, []);
+
+  return (
+    <details className="workSwitcher">
+      <summary>EXPLORE WORK <span aria-hidden="true">▾</span></summary>
+      <div className="workSwitcherMenu">
+        <p><strong>LUC COTE</strong><span>ONE PRACTICE, SEVERAL WAYS IN.</span></p>
+        <div>
+          {destinations.filter(destination => destination.status === "live" && destination.url).map(destination => (
+            <a key={destination.id} href={destination.url} aria-current={destination.id === current ? "page" : undefined}>
+              <strong>{destination.label}</strong>
+              <span>{destination.description}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </details>
+  );
+}
