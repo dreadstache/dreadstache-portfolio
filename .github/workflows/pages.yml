@@ -28,6 +28,7 @@ jobs:
           mkdir -p _site
           cp -R github-pages/. _site/
           cp app/globals.css _site/styles.css
+          cp -R public/legacy-work _site/legacy-work
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:

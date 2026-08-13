@@ -19,3 +19,13 @@ npm run dev
 `npm run build` validates the full Sites application. GitHub Actions assembles the static viewer from `github-pages/` and the shared `app/globals.css`, then publishes it to GitHub Pages.
 
 Studio uploads and model deletion intentionally remain available only on the authenticated Sites deployment.
+
+## Refreshing the earlier-work archive
+
+Before moving `luccote.com`, run:
+
+```powershell
+python scripts/archive_legacy_site.py
+```
+
+The script preserves the complete source snapshot in the ignored, OneDrive-synced `legacy-source-archive/` folder and rebuilds the public-safe archive under `public/legacy-work/`. Commit the public archive and deploy both targets normally.
