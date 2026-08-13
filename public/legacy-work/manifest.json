@@ -1,0 +1,644 @@
+{
+  "schemaVersion": "1.0",
+  "archivedAt": "2026-08-13T22:09:13.067160+00:00",
+  "source": "https://www.luccote.com",
+  "title": "The Archive: Earlier Work & Foundations",
+  "description": "A preserved collection of earlier character art, production work, experiments, and professional foundations.",
+  "pages": [
+    {
+      "slug": "videos",
+      "title": "Videos & Production Work",
+      "sourceUrl": "https://www.luccote.com/videos",
+      "text": [
+        {
+          "kind": "h1",
+          "text": "Luc Cote - 3D Character Artist/ Generalist"
+        },
+        {
+          "kind": "h3",
+          "text": "Shai (SmurfCat) - WIP Substance"
+        },
+        {
+          "kind": "h3",
+          "text": "MetaHuman - Annoyed Elder Millenial"
+        },
+        {
+          "kind": "h3",
+          "text": "Kimahri Statue Photogrammetry/Lidar Scan - First Pass in Real Time Substance Stager"
+        },
+        {
+          "kind": "h3",
+          "text": "Metahuman Creator - Using Standard Animations"
+        },
+        {
+          "kind": "p",
+          "text": "I have been working w ith the Quixel MetaHuman Creator early access and have some decent results. Very easy and intuitive, not to mention groundbreaking (at least the creation part before the export process). Here are some basic quick captures of a character I have been working on. He started out as a preset but I have blended him with at least 7 other presets of significantly different varieties. I rec om mend anyone to check it out, even non game folk. Its easy enough to get you hooked, I promise. I will update when I have a little more fine tuning!"
+        },
+        {
+          "kind": "h3",
+          "text": "Project WOTO - KMMIE - Facial Scanning Tech"
+        },
+        {
+          "kind": "p",
+          "text": "Here is the tech we were working on for Depth Analysis at KMMIE. It shows the old heads we were working with on L.A. Noire, and what we where we were going with them in real time for Project WOTO."
+        },
+        {
+          "kind": "p",
+          "text": "All of the modeling, unwrapping, sculpting, mapping, and blending work was done by myself. The Depth Analysis work was done by Scott Mcmillan, and the incredible pipeline and tools work by Hamish McKenzie. We used the original scan data is from Depth Analysis, using a line from L.A. Noire by the actor Bob Clendenning."
+        },
+        {
+          "kind": "p",
+          "text": "In L.A. Noire all of the makeup and face textures had to be scanned in, which required all of the texture work to be finalized on the scanning end. With this new tech, we moved all of that responsibility to the character artist, who was then allowed to do any texturing required, from makeup to gunshot wounds. And the biggest advantage was being able to put a realistic talking head, connected to a game mesh (which we couldn't do in L.A. Noire). No more hiding neck seams behind collar attire. With this new method we were able to get perfect real time facial animations using realistic in game budgets."
+        },
+        {
+          "kind": "h3",
+          "text": "L.A. Noire - Team Bondi - Rockstar Games"
+        },
+        {
+          "kind": "p",
+          "text": "This project was my first jump out of freelance, and the beginning of my four and a half years in Sydney, Australia. I was able to work with an amazing crew and some incredible new technology, and we developed a title that sold nearly 5 million copies."
+        },
+        {
+          "kind": "p",
+          "text": "As a Character Artist, I was responsible for modeling, sculpting, texturing, skinning, and creating custom rigs for in game characters. I oversaw the main character, many principle characters, and a large amount of npc's."
+        },
+        {
+          "kind": "h3",
+          "text": "Project WOTO - KMMIE - Warner Bros."
+        },
+        {
+          "kind": "p",
+          "text": "Team Bondi became KMMIE in August 2011, when George Miller showed interest in a game development studio, and partnered up with Brendan McNamara. The remaining members of Team Bondi formed the KMMIE crew, and we began development on our last project, WOTO. This game was set in Shanghai during the 1930's, during a revolutionary time with an incredible cross culture environment."
+        },
+        {
+          "kind": "p",
+          "text": "Happy Feet Two - Dr.D (Warner Brothers)"
+        },
+        {
+          "kind": "p",
+          "text": "I was a Character Finaller for this project on its final months of production, during Team Bondi's transition to KMMIE. The Character Finaling Team corrected animation errors and strange deformities in the models in each shot, using specific Dr.D pipeline tools and corrective blend shapes."
+        },
+        {
+          "kind": "p",
+          "text": "Old Showreel - 2008"
+        },
+        {
+          "kind": "p",
+          "text": "My original personal work demo reel, last updated in 2008."
+        }
+      ],
+      "images": [
+        {
+          "src": "legacy-work/assets/videos-01-fa40fcfe54bf.jpg",
+          "alt": "Archived Videos & Production Work portfolio image 1",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQVv9oR0PkqrJ0jP4QrFTHALOz7u8iK32mH_45_3Xk_DTC8lT4KXsW7Sv84A-FFVHSKCcfCMM_XUFfmC7kojqeMcN2yhjq6mLSx8vTImzPK-ga7Gl74mVdPf5D0MNx7w8d-fl4pntT6ckBusn683934svqB1UJ-6eZ8s5VBLa4yTTLyY35N7gYhZSccM6Y6HoGF6nvdIjhgLHgcC9zVwS3FIFqWLCxNoQUKqzRtm-9w=w1280"
+        }
+      ],
+      "videos": [
+        {
+          "id": "NpVLDcWy8GA",
+          "title": "Shai @ Substance WIP",
+          "url": "https://www.youtube.com/watch?v=NpVLDcWy8GA",
+          "thumbnail": "https://i.ytimg.com/vi/NpVLDcWy8GA/hqdefault.jpg"
+        },
+        {
+          "id": "AXdop27iQq8",
+          "title": "Metahuman Creator - Annoyed Elder Millenial - WIP Full Length",
+          "url": "https://www.youtube.com/watch?v=AXdop27iQq8",
+          "thumbnail": "https://i.ytimg.com/vi/AXdop27iQq8/hqdefault.jpg"
+        },
+        {
+          "id": "AsLrqaiMUWk",
+          "title": "Kimahri Scan - Stager Test",
+          "url": "https://www.youtube.com/watch?v=AsLrqaiMUWk",
+          "thumbnail": "https://i.ytimg.com/vi/AsLrqaiMUWk/hqdefault.jpg"
+        },
+        {
+          "id": "1zdgV6gRLgk",
+          "title": "Fred - Facial Animation Outdoor Lighting",
+          "url": "https://www.youtube.com/watch?v=1zdgV6gRLgk",
+          "thumbnail": "https://i.ytimg.com/vi/1zdgV6gRLgk/hqdefault.jpg"
+        },
+        {
+          "id": "HCVxsytDXtA",
+          "title": "Fred - Body Animation Outdoor Lighting",
+          "url": "https://www.youtube.com/watch?v=HCVxsytDXtA",
+          "thumbnail": "https://i.ytimg.com/vi/HCVxsytDXtA/hqdefault.jpg"
+        },
+        {
+          "id": "apmAbmnOb7c",
+          "title": "Fred - Idle Animation and Indoor Lighting",
+          "url": "https://www.youtube.com/watch?v=apmAbmnOb7c",
+          "thumbnail": "https://i.ytimg.com/vi/apmAbmnOb7c/hqdefault.jpg"
+        },
+        {
+          "id": "McTZIm-t6Zg",
+          "title": "Luc Cote' - Depth Analysis Tech Comparison",
+          "url": "https://www.youtube.com/watch?v=McTZIm-t6Zg",
+          "thumbnail": "https://i.ytimg.com/vi/McTZIm-t6Zg/hqdefault.jpg"
+        },
+        {
+          "id": "xk69qfTRIgY",
+          "title": "L.A. Noire - Official Launch Trailer",
+          "url": "https://www.youtube.com/watch?v=xk69qfTRIgY",
+          "thumbnail": "https://i.ytimg.com/vi/xk69qfTRIgY/hqdefault.jpg"
+        },
+        {
+          "id": "aL9wsEFohTw",
+          "title": "LA Noire - Tech Trailer",
+          "url": "https://www.youtube.com/watch?v=aL9wsEFohTw",
+          "thumbnail": "https://i.ytimg.com/vi/aL9wsEFohTw/hqdefault.jpg"
+        },
+        {
+          "id": "cQhTl5_LzCk",
+          "title": "Happy Feet Two Trailer #4",
+          "url": "https://www.youtube.com/watch?v=cQhTl5_LzCk",
+          "thumbnail": "https://i.ytimg.com/vi/cQhTl5_LzCk/hqdefault.jpg"
+        },
+        {
+          "id": "BwpevTO4iW0",
+          "title": "Archived video BwpevTO4iW0",
+          "url": "https://www.youtube.com/watch?v=BwpevTO4iW0",
+          "thumbnail": "https://i.ytimg.com/vi/BwpevTO4iW0/hqdefault.jpg"
+        }
+      ],
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/lucmcote/"
+        }
+      ]
+    },
+    {
+      "slug": "sculpting",
+      "title": "Sculpting",
+      "sourceUrl": "https://www.luccote.com/sculpting",
+      "text": [
+        {
+          "kind": "h1",
+          "text": "Sculpting"
+        }
+      ],
+      "images": [
+        {
+          "src": "legacy-work/assets/sculpting-01-bc8391da8c3b.jpg",
+          "alt": "Archived Sculpting portfolio image 1",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWenEsw2PRlqOZgEhH8e_KNMOjUtSVUi1uDUw1BkozSx3mjo6r1npE2n2bTCal_gb-XeXzkgzqqR_woYhvYAd2j0wSebeAiSFjd2xLTGYu0jV8TEaqMKKscHEy_YMLh5vz8k9rfINkPS58pTfHpXso7dBl2lZzb2uGVDHph89mGf1pNzIy_bNspMNiitGwLmt7Rga55F13BUmJfcebM4cPL2pFlGGJ3EWwGZspf-i0=w1280"
+        },
+        {
+          "src": "legacy-work/assets/sculpting-02-6c15287d6e57.jpg",
+          "alt": "Archived Sculpting portfolio image 2",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWBmMhXx-2VWPVPkasznY6TJEFGziY3q-SpRnduQ_WuK_oKFsK5owD3fVKl1Fi2cbap5Vx6RbsbAttGjqZCzI8bmIjPgYwRRDd8_zsJPSmE7ihzKQTAtzHEke_eV3PUQ4vb-JKWrCP6nTaI9nlL-FWTDirr4hYTANAUOp1U08C5q8kzaItdWvjRsi5Ocqjwh2U5HdNCThtDh-DXEIbr3ISx1dQGTH2qPMzu-aGShtI=w1280"
+        },
+        {
+          "src": "legacy-work/assets/sculpting-03-8d956e9ce69d.jpg",
+          "alt": "Archived Sculpting portfolio image 3",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWMnceeZNkI0RxAMka1P92uZqS9uYXM4DEb32YntdSzoXugiy9iPV8vZ5QAXzAPvvTf5-YuEjY0EOwda0Nq9yqTdhp_8rvYMyNBd4yLnudvkWgbap12_1pM8fZXk-pTddBcvMxd0xBFtFeRANAWhhhFqP6oORyj-T-FCsNiVGkngiktUsYAAQ5rEBUoMAvyMXEQGUIcJONNQMuaqfJPPlivVAK_KEGbCBNpNMy53hA=w1280"
+        },
+        {
+          "src": "legacy-work/assets/sculpting-04-776bbad9dc7d.jpg",
+          "alt": "Archived Sculpting portfolio image 4",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWWgzolXBOs2OhLrCoVYGBiFhdbLVrHKvrLdoOAv8EGocmdfuyXvkyC23uk-Q5H-aR05n6HCwJTe_cTRHH1Gl5huRTRozuDpIE4M_eNyJ28aok-BBqqaQ5i-TepcfnTKVMwwZE5UWYTYsHbhGgjlIN7Kp6pNkC35y_v_7WDTjQ2Ax8ZKq8vwAqA84L6QZVX3oNWsQnCyrbWK-YM7vtgoOL2DMGHFuq3KKrpl34Y=w1280"
+        },
+        {
+          "src": "legacy-work/assets/sculpting-05-56a67a35b0d1.jpg",
+          "alt": "Archived Sculpting portfolio image 5",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQXe4-C3MvTt-sINYr_g-hN1fICScESMT-eyEL4MTX05wWx3G4Y-J9if7MWNT774HuIOZvC06loU6YvS-RsIBAUS6Z7WfQTCNkOx9EGDFf-FnPajzN5gx9RbY0JNChgwPRoph7neYYDB8JHTk6MpNjImMEMxm5BMjGvVppIZI0Mp9UtJwarwwjPVt_zFu7ddoOAbGIFcYFqEmOl3upTyqfvDz5ZP5Llo6juhzHQvQRc=w1280"
+        }
+      ],
+      "videos": [],
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/lucmcote/"
+        }
+      ]
+    },
+    {
+      "slug": "rigging-and-skinning",
+      "title": "Rigging & Skinning",
+      "sourceUrl": "https://www.luccote.com/rigging-and-skinning",
+      "text": [
+        {
+          "kind": "h1",
+          "text": "Rigging and Skinning"
+        },
+        {
+          "kind": "p",
+          "text": "Driven Key Skeleton"
+        },
+        {
+          "kind": "p",
+          "text": "This is an example of using extra \"Driven Key\" bones in a Maya skeleton, and the comparison of their benefits. On the left is a standard skeleton with no helper bones, and on the right, my improved skeleton with improved deformations."
+        },
+        {
+          "kind": "p",
+          "text": "During LA Noire we used a specific Driven Key skeleton for complex motions, animation assistance and corrections. For Project WOTO, I dropped the extra bone count from 56 to merely 18, not only holding the same deformations, but improving them greatly as well."
+        }
+      ],
+      "images": [],
+      "videos": [
+        {
+          "id": "40T9aRbSANA",
+          "title": "Luc Cote' - Driven Key Motion Comparison",
+          "url": "https://www.youtube.com/watch?v=40T9aRbSANA",
+          "thumbnail": "https://i.ytimg.com/vi/40T9aRbSANA/hqdefault.jpg"
+        }
+      ],
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/lucmcote/"
+        }
+      ]
+    },
+    {
+      "slug": "low-poly-work",
+      "title": "Low-Poly & Game Assets",
+      "sourceUrl": "https://www.luccote.com/low-poly-work",
+      "text": [
+        {
+          "kind": "h1",
+          "text": "Low Poly Work"
+        },
+        {
+          "kind": "h3",
+          "text": "DOTA 2 Weapons"
+        },
+        {
+          "kind": "p",
+          "text": "Together with producer Patrick Lemus , and concept artist Nate Hallinan , the three of us formed the production company No No Geode . Our first endeavors included making weapons and accessories for the game DOTA 2 . Below are some various WIP stills, and in game shots of our creations so far."
+        },
+        {
+          "kind": "p",
+          "text": "You can see our work on the Steam Workshop here: No No Geode Steam Workshop"
+        },
+        {
+          "kind": "p",
+          "text": "The Cranky Painsaw - Pudge"
+        },
+        {
+          "kind": "p",
+          "text": "Original Concept"
+        },
+        {
+          "kind": "p",
+          "text": "Completed Model"
+        },
+        {
+          "kind": "p",
+          "text": "Loading Screen"
+        },
+        {
+          "kind": "p",
+          "text": "In Game"
+        },
+        {
+          "kind": "p",
+          "text": "Heaven Sent - Keeper of Light"
+        },
+        {
+          "kind": "p",
+          "text": "Three Torments - Spirit Breaker"
+        },
+        {
+          "kind": "p",
+          "text": "Skull Sculpt"
+        },
+        {
+          "kind": "p",
+          "text": "Rigged In Maya"
+        },
+        {
+          "kind": "p",
+          "text": "Holiday Ham - Ogre Magi"
+        },
+        {
+          "kind": "p",
+          "text": "In Maya"
+        }
+      ],
+      "images": [
+        {
+          "src": "legacy-work/assets/low-poly-work-01-4c67085dae02.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 1",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQX_jfna3L5jsPODWVzVhbG5KMwjM9Zxd-OwQmp_VzLUz2VjB5xgA56npn55yCqN2fvWqCcx0aetqjeJEdivIH_A7FBo-FNKshY4HTXRJUd0wXa4hqAPy2_XyktxwfgSXd9jUhL0OPwk_qMC2igcwUmnqDnNdEAVQNBa02DbUpj9Cl8u1OQtwo_g5V2b2fA=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-02-de747ba38b54.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 2",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQVudM3jinD0TsuApEKDePP6zpkRgz0uXpedm4KWfh54As2MwJP90-xpTOJYCYZZa7kMA3MnxKACYnuQ4PfCYTQRyenlMvhwWQ06q_ytuQyz9ypywWhfGz6scHSkhykMlxR0zAmOlwU9ehhFJdZ7ZvRBDCCBev09mthSzVc2oexmxLkKFdaLCIPxSAe9AM1YqY-ZC2s9EPp0cv5366yNxFlWKZOtDTVDJk3xVAJ5=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-03-2c49ad16aa02.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 3",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWXlnQx3oSjXuw1-etL7zDSQjH3DWnGcWOwoZ70O90QkBMclW7BDGH2MRd97R8LPpUxyI828N-WnyAo1HsQAzy74csK7eCFKF8FTaSm8GOeUGd9vSIBNq9TcG3G_Y74NOVo1HSHvNR5t--GNJywffbcHRJ2B5_vti134dvk-cdotldo2NjOW3ovuZuTm1M=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-04-c24fa695d3c2.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 4",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQV_HeAKW4bZ_8Z_Z7axJkeZjAP6wUElgolyXtnG12SPuWvj1Rudz94s9dF9VT9TGAeImZdfwWcGKFYHqYzuFpl4LRMjF--iG7mt3LAuLkHQixDBy-22ZUbot1llppYadtjZ-IP447vCFIb4TKHycZacG83JN69w1X1gaguUgTIrUvrdCjsZmdN5jBZepto392Ecp8_Z48f29u0i8azO9hOU9tSmuxUXwH7hIHFU=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-05-eeb9bbca7b20.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 5",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQU7OXWroH7nDu97dKqSgvcVk9xHgWsa4YxgGSWCFbQR7pBACyJsvDpnmR-CTGQHVlRByWR3blqceZuUIXABNmfyJeMkGGiYwPvw4VQjzdxjIG2JMRQGjJe90_-fk2NygNgwx77cMWsOUQcGgNd56HS23ooNTA-wuo2fiNCO7alD-iRw8PExRoAn9C8NknnfLS6xWvHIhWsWQsyb3_w1__wgFdyi85VEKmnIB_gsjJ8=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-06-8613d8d89f18.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 6",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQUO34e0quVrZI7e14KXNUUsYb0E5quA5QRNtsq2lUkGA1-kllldPEenYCVmFHTGOMoG2gi30aAUnwKX8Jv9fkbzwsjDhMGK1lq_i5JCuL66mDMc_MbNFqwqkkg1n9kn5ENFXmFJqweED47pmLe41ED6QGryHaolJq2u3QxKSeHlYssaZZasA9iIFsDdHxqNrsGOxGl5cmzWVjvfzpV0rzuXDJzEfbESHKVXSh28=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-07-cc869cf62807.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 7",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQUFk23d7biTYpH_LbBDv5BLXQkmZa8S5UMXbziWdpDlsTd8c5Cq12cGiNiLZ4Y4i4eNjO8evr0AJldzjPAonn6RMSObgplhgzn6tfD9rlW-mHNH_TGnzsRuw7arlHMsc238xWr1DXKAeUat0ZsEJoJae2FJi1BeCXnO7virhtJq0AS8zi_edkvBRrRYj-tEsxqfaooqflRRkWz_1cRsNkX0mRednQexvM9KJ1pV=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-08-0265a6ad930e.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 8",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQVjXdN3es2UT8BrJUjKCbD5-JAkspsQWoLo1EKNIZqjUx577VaccrhntcecWEElK9sXZkYSH03UYIsMPjN4SNPN7cqVB9nYf9oLFckVSrkNuQGf_8JUpEeODXc7hgvhRSBbZpJSmQtwvIxzysp81U0sPQprnB7AWd3lDRSPJp4AqVrT-xtr0yU2_gBWEbEKqi9vheld-nhRwpRO5gAFtPYnZEVcntXdHV6T7iz00SA=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-09-dca62a59af83.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 9",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQXDaDd8J0tm4ZbpW800QWT6liN_j2fhxmGWS1QGJYPWOD8OSc8O2EUs1QupNDudGZp3yXrjt1YW9VRwS4AawDsHtRuJLfm1ddhC_uNM5T3e4b7i4oJSEFQnkPYP1wO6lVpUNCrMKkKuMdbRZ7-Zqk9u_R3JizQ7mcmiFmKPpWkgL25d8evmLc8TvjUr=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-10-b3e79389956c.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 10",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQVo_D9b4BOIzsHmRZg0_NUZiZSC7BRtR1x4ROBxdTOjTP9hrcl7EgBgKnZtTXkDlV55oD5FYaTrzUo2Wcj69Ysc0jtVgpjBmcP9eYtBwpLQ8jHuPDrOydUsL3EAdttymgtBy5-mj8iUTDGUBZ1NwmnO20ZJSR5bq592P4dIC9yWWPKK3oFlTARCNz9BZk43l00RAv7gCHs09fOBZdugo8ioXc18ugZUbOYMIvNNHgo=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-11-d7fb574c3d2d.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 11",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQXjiJkWIu_d_or764z3WJXad_qjXQW877kkNU-66zYQ-WDGr6y_-of7xCXbYKrJlqnXe9YNlJmdTpdadZW4--mPG-fUGtoXdxynW8AtXgeS4UytVFjZskR8xIhxWIuJd_zMCeGkBkEsJuoKj2h9uIa-kK3S34UUp2S33-3emeAwD-JITQQmUAZnaJFfoEfAfurpP1Zxy0Y0J_nCXr3j09GRbIEDlLvK2r7Wh81p=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-12-9a3199ce5c65.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 12",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQUexFD2btOLNSP9rpeXQqsyuqWry6rcB11r-pMicVVqZOVArhz422wKpL0Y7ILTSmk_-JhwkYZEAHaXUcbRJuVlRfSAqma1NKf-aUy_UZg6794wt051EVnM9zN7MCy7GZu1o77EpruLKFPenGQTZkVFRuFkHXvY7mJJTuClcWVG2ehsMR6waIVIdo4zV0XjC6mYA1UpEzDhxNP-cuXhCPF_zIVsNly_kIORElU1Xqo=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-13-b1d7eb28633f.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 13",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQXD7I4pGkViPBD324XYAFtt2_9nvHUeuOKa9nUJuB0EnSu6mZcW8DCR0oE-y3OFNKq0KozE7hT1lbj9gO6Qsvzc_2_gNJz7N9SgyNr_aChufccLgkV1epgcFyrKNJBEQSs063VM8KDoSOgU5moI_Dbozc3aCm1jhRChRhTznOUHcDtrPowWfxiHaFVM=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-14-d8514d76101f.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 14",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQXyXHAO5QvsVCySG3gbnVFNXCI1_vwfTCi7xsvfPW-3DAdBZFjj_GtbUKARzqzupPDiZwzSBxSj_khxIrnmp_unaJZSuCvEhEbnyXuJ5BdIifyyM8__FEDnRtKZ6uv43tJnV09286LOQOS9bnXryaSefxF57dQoSi3T7UGqNH_DvUnAV3oCIZOOyvwDDWUUPjYNLOJhvVwhLDsp7qvps8cufWtsQcDPH7Brdo0ho1I=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-15-3fbce66675aa.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 15",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQXe5x_Tb67aTygFi7vtbzdREmgg0e-2ReBO1XESJne7XvyflVThVBK7Zb6R1A1eF2DuXRgvIwibNOl4CY0K3u3gXnuHfjhYNz5COt59F6FcNyhEZmFXUY1pU0hktsTIZWdKthqPGEZ4CD2vob0cw_47uonlAAv6tj6b0SH8wYpulOn_MZRKPWUMJNp0F-mXz2x5avoVNskhh_w3acT2w0ORt93n3qqimcCLeuM-=w1280"
+        },
+        {
+          "src": "legacy-work/assets/low-poly-work-16-2f7e286fa9b9.jpg",
+          "alt": "Archived Low-Poly & Game Assets portfolio image 16",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWRZNrbNVAjcWkj4tFNMy_OqDTn-emvnmqlQ2SDUc3QF6O0w3uelfuEF8ksR6SmEpsZsO28eXCfM41zdR-3WrYUcRAcIFVdYHItYpT-ALMPt4hdjASamvpaLo8oxryJZFt1W5RQGu6BMTwu75lpQ4z3Dmj6CIobErIrW-AzRs2tVFVAF_755tyHw6R8G7qz5PWexmnEKBFAHKhOeUFEtUct1CdChsHDK5FLXYE4=w1280"
+        }
+      ],
+      "videos": [],
+      "links": [
+        {
+          "label": "Nate Hallinan",
+          "url": "http://natehallinan.com/"
+        },
+        {
+          "label": "No No Geode Steam Workshop",
+          "url": "http://steamcommunity.com/id/nonogeode/myworkshopfiles/"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/lucmcote/"
+        }
+      ]
+    },
+    {
+      "slug": "gallery",
+      "title": "Still Gallery",
+      "sourceUrl": "https://www.luccote.com/gallery",
+      "text": [
+        {
+          "kind": "h1",
+          "text": "Still Gallery"
+        },
+        {
+          "kind": "p",
+          "text": "Depth Analysis R&D - Kennedy Miller Mitchell - Actor Bob Clendenning"
+        },
+        {
+          "kind": "p",
+          "text": "Topology, texturing, and realistic hair added to a bald guy for Project WOTO R&D."
+        },
+        {
+          "kind": "p",
+          "text": "L.A. Noire - Detective Cole Phelps - Traffic Suit"
+        },
+        {
+          "kind": "p",
+          "text": "Principal Character from L.A. Noire, in his brown suit."
+        },
+        {
+          "kind": "p",
+          "text": "L.A. Noire - Magazine Cover Work"
+        },
+        {
+          "kind": "p",
+          "text": "Sculpting, Posing, Character Art, and Touchups"
+        },
+        {
+          "kind": "p",
+          "text": "Old Reel Stills"
+        },
+        {
+          "kind": "p",
+          "text": "Hard Surface Work Stills"
+        }
+      ],
+      "images": [
+        {
+          "src": "legacy-work/assets/gallery-01-bcfc67b37836.jpg",
+          "alt": "Archived Still Gallery portfolio image 1",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQXBZVEz-Becg41UFMaGMj253v7mcMZ77t1kqqfgu0TpMmYkDr9OnNtBKFe9ZoktqytS5nRYwAtTbCnAqvQCMoHdf01loNFXDTH0RdsERrfRJjZosmN3wUfK7MC5AAkZ8IiiVob8Qi8vj7rpZzuf5QiJbD1qA_Z5WuubCSPpDYqiB4nTaGCO6OPGMKaGmt5PVEkcRin_ccrR7bZL0kN9BKkrg_asze362bWsBxUlxok=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-02-b153f7c6741f.jpg",
+          "alt": "Archived Still Gallery portfolio image 2",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWZ-BFCk9Xd1ghNRQOgvkDrhzaCL9wztAeVFKso3hGA4Jd6U79FExHVInC1a7L-gvbefUaTyEYJxiEftXfkyFQy5oFDs-60qkby6gjsEl511acUNfIqMQosAR1mn5qNX6w4qVkmvbfIpJ9XuowSwCrjfsyA6DxsUTn0bG19X3zacOswMhJJTmY-qyQ7pMIQEqyaab39aUMtqLwfnaybcyyb8R5F1s9g7HALipa4Xlk=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-03-048e351d4432.jpg",
+          "alt": "Archived Still Gallery portfolio image 3",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWsSOrhsaqRinDXYrmlPX6qgDjVlwcIH3js9Yft4qe4iTTxZZZmDneRLfd3xfdBUyhBI7pewr0BGiDquCDYqDvV0QJb8FYBaS2Jf4OD5wNFzX6Eq5f3WiYLktBFkEBwlo4FV_xFnayr2Psv3F-6M-QlNLFGjE0_ITBf6LYMRal-2z0PB5gpEO7k5SBQ0fdBYb3xPgJXYKixu1_jepV__oRRGih26kBwMO4blCsl=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-04-4d934d2a1079.jpg",
+          "alt": "Archived Still Gallery portfolio image 4",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWdGn7F6Pk7jAphDdKOsgRuA_27Bx6VRd3r-zxZSpTgdGFTLNO68AQdnODJOWZavVcj7C4oY_RnMLl-S-GGJnW_pERKV1uIrY-3uYikkH4TSi5xz5WjVnXvuSkZSDa_t_-9SrtbN6mm010zBmWonCzpilriEeoTgRWZr1PJq6iIos7M3r5RM1GvwmPMjPVCedVgfgp-TgSQ2ky2kPR6m1ENvHB0XzaIRB04EULH=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-05-dcc0e0c60724.jpg",
+          "alt": "Archived Still Gallery portfolio image 5",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQXwNNWis_kRkd-Q0i2fVjWZHzq9YsE03uCMyyYmz4O_0NIBVl4cCAIOjujkBUxvPu6f0Yrgl31PFFa1tRi2wR6w42S6A33f7bYiPRhUujQvAKSMOpdMmy1MYmTA9xna3jO3_MdO5hoQ9LNYiMYbgFS5jbmdyx4L10I7mw70Ha-bh0yXV_mLMpel4gXbgI7JLOVmizc7RJuvwzzyPa5QGpc7Ojj8yGA3o7svfNeOJUA=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-06-118eeaac55a5.jpg",
+          "alt": "Archived Still Gallery portfolio image 6",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQUdHn3JMDAOpFugOcxP2VwAA_h_r-9xHhRj5vSxKFnU3MPXTJQkfid5aDjibRe3lfLlW7QKeCFDIALFASIcIvMuU0IG4vnKcT9XRuzefx5_aQc8XOxXCFsunH1uaxcbsM6fNlFmojWmQQpp58R538frGAY0UbD4TTd1viAG7nnricIWW7qFYMyDFfPEbHSvsaJgAmFK__HBrkzkhhcWeP0YKnD7w0JhnJmkiYY-aRQ=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-07-da8201585d35.jpg",
+          "alt": "Archived Still Gallery portfolio image 7",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWon0WcJMbg62etuOrLdNnHUImq0_c31Q6sohSJVG9-c3Fpzg0fzk_5W242y3ehOceA_G81qi5fPmd0QkvAsSYWk1LGNif41SOEoYdCnT67Cw2cTAsjQMI4xJIMhbQ2xcbGl4ukQWCk-vlXrPMbO-AZJTjcldBQK2pf-b5pH_kl3-kTs3z0c_f9ojkYE3j3KsXqDGz_Fm25bk4QZIDt4mGtbwa7builUUBdX1fTVR0=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-08-69d1cb6278bd.jpg",
+          "alt": "Archived Still Gallery portfolio image 8",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWy5txyGbB_pt-nKjWgHmxnLPmsq7L-ggGsWhKZOPmS-jAdtmaZuqpdJsyMOHy7QJdgTPbVtesuUDBNmupuFZYunH8VguDiXKFQnah7Zy1JbvE8Sxa9IdQ5tRW3lc2YIj44S_w-puWq17P-_KIrIiUJcJkWT0yktyqasMX4VCrigviVRnBlK-aemMixWJhdmjDkFt-vStnXhrMvS-tT0pSt39YhPFjTuNXFaoz_Tvw=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-09-e827d70a3d17.jpg",
+          "alt": "Archived Still Gallery portfolio image 9",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWQR7XhK23MpDTraNBHjgH_ME5GjANr75XB90RYWjUFqLuz28nWuXMGX-BhjLXFC89XqODv5_e_xJ5_f9FG0aQsS4OJp-cSVYYUyBZNcp4IHxP5WsPfiFIPvIBoetfX0umsN_J_yY7st4FQ5iHMGYYlPlAF3R6322l6HHn88itlr2ktmgH0gsKve2PiWZIENQGnoPqMyi7hSjK4uTLWNPESJTHfBT8aM0URs4Br=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-10-53a9724d41e4.jpg",
+          "alt": "Archived Still Gallery portfolio image 10",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQUAhvwVyjqMdlHLzzJjMFVuC5kjFAM4H_jXSqcnTxLA8PUX6TxtEIteNpeKMRdY-HXRtzvewb_MfAl-YjR5HbiZv_FB2RoRLeb6apsWffwFL4PbP0gOOUkvBCwuHZn-KLGPVGYc05ic9MFWpkoHKtj3wYqq0wGoyeT1cvWSW78LSerm34naXOO0_oQPdag=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-11-f475486cf9ad.jpg",
+          "alt": "Archived Still Gallery portfolio image 11",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQV6hipu-9wiShSE2W9xAIDTtEOz73sjehOwfSeJs1as8bnqUEPqmCgHwIdvFD63eG40DwmNhuWSrxshSg32LxV8ZlW5IAcOEMvcPbC_laaLiJsxVn3eaH7vdOFRrKF0UoJWATCu9PduqQseJMDhtY3dfBf4NUNmxc_-kRseHRAv8VW4frJw4kH36sq1zXo=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-12-aa607b766ef3.jpg",
+          "alt": "Archived Still Gallery portfolio image 12",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWSmPLrtqUW5qLsctnBSW6kTtRtzm6sB4AqlEwMj6EzB1I9Bsa1FYJS7ITfJrabdecrpXSLt9Xa5GhZ-29nDC_7q_7DeBOtzNWL0wLNQARffgSXBl8ynUm6ccPfZOXnodyP4cb-RkZeRz2ciiG_zO1Dg3FU7uYRccvoXaiSoQ2c3nwxm3Mk0cFoe21tXio=w1280"
+        },
+        {
+          "src": "legacy-work/assets/gallery-13-22594a529bbb.jpg",
+          "alt": "Archived Still Gallery portfolio image 13",
+          "source": "https://lh3.googleusercontent.com/sitesv/AG8ngQWq3VEkPs3TZrrL2-VwFdazWIFxxZfvWDU0Kji7HWBcS_R8O7N6vUlGtv38w7JlbYo1_nwHIdYo35NrwUFGjxuHLS6oKOx-9u5bm9vPOoZd2e_JCzGBKiDxiC8cfMxUPRVDpRODVAyGuNHvhAJcLTIo0rvqbpZZpHvaHaPz0X_HHyjel-5VEqlm_R8F7UZ-8JEPfPMF59uqeLEmp5xlB0YVVt7OCipedmQlAXxj=w1280"
+        }
+      ],
+      "videos": [],
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/lucmcote/"
+        }
+      ]
+    },
+    {
+      "slug": "references",
+      "title": "Professional References",
+      "sourceUrl": "https://www.luccote.com/references",
+      "text": [
+        {
+          "kind": "p",
+          "text": "References"
+        },
+        {
+          "kind": "p",
+          "text": "Garrett Biernat - Programmer at Netrush - [contact archived privately]"
+        },
+        {
+          "kind": "p",
+          "text": "Sonny McKnire - Systems Analyst for the City of Casper - [contact archived privately]"
+        },
+        {
+          "kind": "h3",
+          "text": "Shane Wicke - Game Designer - Team Bondi/KMMIE"
+        },
+        {
+          "kind": "h3",
+          "text": "Fei Zhao - 3D Graphic Artist - Team Bondi/KMMIE"
+        },
+        {
+          "kind": "h3",
+          "text": "Jason Baskin - Character TD/Animator - Freelance"
+        },
+        {
+          "kind": "h3",
+          "text": "Nate Hallinan - Concept Artist, Matte Painter, Illustrator"
+        },
+        {
+          "kind": "h3",
+          "text": "Joanna Priestley - Owner at Priestley Motion Pictures - Freelance"
+        }
+      ],
+      "images": [],
+      "videos": [],
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/lucmcote/"
+        }
+      ]
+    },
+    {
+      "slug": "resume-contact",
+      "title": "Profile & Tools",
+      "sourceUrl": "https://www.luccote.com/resume-contact",
+      "text": [
+        {
+          "kind": "h1",
+          "text": "About"
+        },
+        {
+          "kind": "p",
+          "text": "Lucien Marcel Coté"
+        },
+        {
+          "kind": "p",
+          "text": "3D Generalist • Systems Analyst • Creative Technologist"
+        },
+        {
+          "kind": "p",
+          "text": "With nearly two decades of professional experience, I specialize in creative solutions that exist at the intersection of design, code, and visual storytelling. My journey has spanned AAA character pipelines, real-time VR simulations, municipal systems analysis, and full-stack software development."
+        },
+        {
+          "kind": "p",
+          "text": "I’ve worked with major studios like Rockstar, Warner Brothers, and SuperGenius, as well as startups and government agencies. Regardless of the industry or scope, my focus has always been the same: solve problems through clarity, creativity, and technical finesse."
+        },
+        {
+          "kind": "p",
+          "text": "I bring a full-stack mindset to the world of 3D—from sculpting and texturing to building out custom tools that streamline entire workflows. I’m just as comfortable debugging shaders as I am leading a team through the launch of a VR training module."
+        },
+        {
+          "kind": "p",
+          "text": "Let’s build something extraordinary."
+        },
+        {
+          "kind": "p",
+          "text": "Tools & Technologies"
+        },
+        {
+          "kind": "p",
+          "text": "Autodesk Maya • Zbrush • Substance Painter • Blender • Houdini • Unity • Unreal • MEL • Python • React • C# • Azure • Salesforce • SQL"
+        },
+        {
+          "kind": "p",
+          "text": "Contact me or explore my LinkedIn"
+        }
+      ],
+      "images": [],
+      "videos": [],
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/lucmcote/"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "pages": 7,
+    "images": 35,
+    "videos": 12
+  }
+}

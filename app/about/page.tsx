@@ -11,6 +11,7 @@ export default function AboutPage() {
         <nav aria-label="Primary">
           <a href="/">VIEWER</a>
           <a href="/#collection">COLLECTION</a>
+          <a href="/archive">ARCHIVE</a>
           <a className="active" href="/about">ABOUT</a>
         </nav>
         <WorkSwitcher />
