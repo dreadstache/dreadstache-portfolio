@@ -13,7 +13,8 @@ function escapeHtml(value) {
 }
 
 function renderWorkLinks(destinations) {
-  document.querySelector("#work-links").innerHTML = destinations.filter((item) => item.status === "live" && item.url).map((item) => `<a href="${item.id === "three-d" ? "./" : item.url}" ${item.id === "three-d" ? 'aria-current="page"' : ""}><strong>${escapeHtml(item.label)}</strong><span>${escapeHtml(item.description)}</span></a>`).join("");
+  const destinationLinks = destinations.filter((item) => item.status === "live" && item.url).map((item) => `<a href="${item.id === "three-d" ? "./" : item.url}"><strong>${escapeHtml(item.label)}</strong><span>${escapeHtml(item.description)}</span></a>`).join("");
+  document.querySelector("#work-links").innerHTML = `${destinationLinks}<a href="archive.html" aria-current="page"><strong>The Archive</strong><span>Earlier work, production history, and creative foundations.</span></a>`;
 }
 
 function renderArchive(archive) {

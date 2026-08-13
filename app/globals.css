@@ -55,6 +55,8 @@ nav a.active, nav a:hover { color:var(--ink); border-bottom-color:var(--acid); }
 .libraryHead div { display:flex; gap:4px; }
 .libraryHead button { width:24px; height:24px; border:1px solid #343034; background:transparent; color:#8d888d; cursor:pointer; }
 .libraryHead button:hover { color:var(--acid); border-color:var(--acid); }
+.archiveShortcut { min-height:24px; display:inline-flex; align-items:center; padding:0 9px; border:1px solid #343034; color:#9b969b; font:7px DM Mono; letter-spacing:.08em; text-decoration:none; white-space:nowrap; }
+.archiveShortcut:hover { color:var(--acid); border-color:var(--acid); }
 .modelCarousel { display:flex; gap:8px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; padding:10px 0 3px; }
 .modelCarousel::-webkit-scrollbar { display:none; }
 .bottomLibraryWorkspace { grid-template-columns:minmax(420px,1fr) 310px; grid-template-areas:"stage controls" "collection collection"; min-height:0; }
