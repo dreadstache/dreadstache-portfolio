@@ -21,7 +21,7 @@ export default function ArchivePage() {
           <a className="active" href="/archive">ARCHIVE</a>
           <a href="/about">ABOUT</a>
         </nav>
-        <WorkSwitcher />
+        <WorkSwitcher archiveCurrent />
       </header>
 
       <section className="archiveHero">

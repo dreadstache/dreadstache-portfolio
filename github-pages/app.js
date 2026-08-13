@@ -27,10 +27,11 @@ let rotating = true;
 let edges = true;
 
 function renderWorkLinks(destinations) {
-  document.querySelector("#work-links").innerHTML = destinations
+  const destinationLinks = destinations
     .filter((destination) => destination.status === "live" && destination.url)
     .map((destination) => `<a href="${destination.id === "three-d" ? "./" : destination.url}" ${destination.id === "three-d" ? 'aria-current="page"' : ""}><strong>${destination.label}</strong><span>${destination.description}</span></a>`)
     .join("");
+  document.querySelector("#work-links").innerHTML = `${destinationLinks}<a href="archive.html"><strong>The Archive</strong><span>Earlier work, production history, and creative foundations.</span></a>`;
 }
 
 function setLoading(progress = 0) {
