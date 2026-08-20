@@ -8,6 +8,8 @@ function pageIntroduction(blocks: TextBlock[]) {
 }
 
 export default function ArchivePage() {
+  const visiblePages = archive.pages.filter((page) => page.slug !== "references");
+
   return (
     <main className="archivePage">
       <header className="topbar">
@@ -31,16 +33,16 @@ export default function ArchivePage() {
         <div className="archiveCounts" aria-label="Archive totals">
           <span><strong>{archive.counts.images}</strong> STILLS</span>
           <span><strong>{archive.counts.videos}</strong> VIDEOS</span>
-          <span><strong>{archive.counts.pages}</strong> COLLECTIONS</span>
+          <span><strong>{visiblePages.length}</strong> COLLECTIONS</span>
         </div>
       </section>
 
       <nav className="archiveIndex" aria-label="Archive collections">
-        {archive.pages.map((page, index) => <a key={page.slug} href={`#${page.slug}`}><span>{String(index + 1).padStart(2, "0")}</span>{page.title}</a>)}
+        {visiblePages.map((page, index) => <a key={page.slug} href={`#${page.slug}`}><span>{String(index + 1).padStart(2, "0")}</span>{page.title}</a>)}
       </nav>
 
       <div className="archiveCollections">
-        {archive.pages.map((page, index) => (
+        {visiblePages.map((page, index) => (
           <details className="archiveCollection" id={page.slug} key={page.slug} open={index === 0}>
             <summary>
               <span>{String(index + 1).padStart(2, "0")}</span>
