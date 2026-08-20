@@ -18,10 +18,11 @@ function renderWorkLinks(destinations) {
 }
 
 function renderArchive(archive) {
+  const visiblePages = archive.pages.filter((page) => page.slug !== "references");
   document.querySelector("#archive-date").textContent = `PRESERVED / ${archive.archivedAt.slice(0, 10)}`;
-  document.querySelector("#archive-counts").innerHTML = `<span><strong>${archive.counts.images}</strong> STILLS</span><span><strong>${archive.counts.videos}</strong> VIDEOS</span><span><strong>${archive.counts.pages}</strong> COLLECTIONS</span>`;
-  document.querySelector("#archive-index").innerHTML = archive.pages.map((page, index) => `<a href="#${page.slug}"><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(page.title)}</a>`).join("");
-  document.querySelector("#archive-collections").innerHTML = archive.pages.map((page, index) => {
+  document.querySelector("#archive-counts").innerHTML = `<span><strong>${archive.counts.images}</strong> STILLS</span><span><strong>${archive.counts.videos}</strong> VIDEOS</span><span><strong>${visiblePages.length}</strong> COLLECTIONS</span>`;
+  document.querySelector("#archive-index").innerHTML = visiblePages.map((page, index) => `<a href="#${page.slug}"><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(page.title)}</a>`).join("");
+  document.querySelector("#archive-collections").innerHTML = visiblePages.map((page, index) => {
     const copy = page.text.filter((block) => block.kind === "p").slice(0, 4).map((block) => `<p>${escapeHtml(block.text)}</p>`).join("");
     const videos = page.videos.length ? `<div class="archiveVideoGrid">${page.videos.map((video) => `<a href="${video.url}" target="_blank" rel="noreferrer"><img src="${video.thumbnail}" alt="" loading="lazy"><span><strong>${escapeHtml(video.title)}</strong><small>WATCH ON YOUTUBE ↗</small></span></a>`).join("")}</div>` : "";
     const images = page.images.length ? `<div class="archiveImageGrid">${page.images.map((image, imageIndex) => `<a href="${image.src}" target="_blank" rel="noreferrer"><img src="${image.src}" alt="${escapeHtml(image.alt)}" loading="lazy"><span>${escapeHtml(page.title)} / ${String(imageIndex + 1).padStart(2, "0")}</span></a>`).join("")}</div>` : "";
