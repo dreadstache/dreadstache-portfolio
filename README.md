@@ -7,6 +7,11 @@ One portfolio with two delivery targets:
 
 The shared CareerOS ecosystem manifest supplies the cross-site navigation for Tech & Systems, Games/Film/3D, Music, and the résumé library.
 
+Public addresses:
+
+- Games, Film & 3D: `https://games.luccote.com/`
+- Earlier-work Archive: `https://games.luccote.com/archive.html`
+
 ## Local development
 
 ```powershell
@@ -22,7 +27,7 @@ Studio uploads and model deletion intentionally remain available only on the aut
 
 ## Refreshing the earlier-work archive
 
-Before moving `luccote.com`, run:
+To refresh the preserved earlier-work collection, run:
 
 ```powershell
 python scripts/archive_legacy_site.py

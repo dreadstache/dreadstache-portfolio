@@ -2,8 +2,16 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Lucien Marcel Cote: Games / Film Portfolio",
-  description: "Present game and film development models in a customizable cinematic lighting studio.",
+  metadataBase: new URL("https://games.luccote.com"),
+  title: "Luc Cote | Games, Film & 3D",
+  description: "Games, film, interactive 3D, technical art, and production work by Luc Cote.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Luc Cote | Games, Film & 3D",
+    description: "Games, film, interactive 3D, technical art, and production work by Luc Cote.",
+    url: "/",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

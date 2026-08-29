@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import archive from "../../public/legacy-work/manifest.json";
 import { WorkSwitcher } from "../work-switcher";
+
+export const metadata: Metadata = {
+  title: "The Archive | Luc Cote — Games, Film & 3D",
+  description: "Earlier games, film, character art, production experiments, and technical work by Luc Cote.",
+  alternates: { canonical: "/archive" },
+};
 
 type TextBlock = { kind: string; text: string };
 
