@@ -10,12 +10,12 @@ type Destination = {
   status: string;
 };
 
-const ecosystemUrl = "https://dreadstache.github.io/careeros/generated/ecosystem.json";
+const ecosystemUrl = "https://resume.luccote.com/generated/ecosystem.json";
 const fallbackDestinations: Destination[] = [
-  { id: "tech", label: "Tech & Systems", description: "Analytics, GIS, software, and automation.", url: "https://dreadstache.github.io/luccote-portfolio/", status: "live" },
-  { id: "three-d", label: "Games, Film & 3D", description: "Interactive models and technical art.", url: "https://vanta-model-atelier.dreadstache.chatgpt.site/", status: "live" },
-  { id: "music", label: "Music", description: "Dreadstache releases and production.", url: "https://dreadstache.com/", status: "live" },
-  { id: "resumes", label: "Résumé Library", description: "Focused, verified career stories.", url: "https://dreadstache.github.io/careeros/generated/resume/", status: "live" },
+  { id: "tech", label: "Tech & Systems", description: "Analytics, GIS, software, and automation.", url: "https://www.luccote.com/", status: "live" },
+  { id: "three-d", label: "Games, Film & 3D", description: "Interactive models and technical art.", url: "https://games.luccote.com/", status: "live" },
+  { id: "music", label: "Music", description: "Dreadstache releases and production.", url: "https://music.luccote.com/", status: "live" },
+  { id: "resumes", label: "Résumé Library", description: "Focused, verified career stories.", url: "https://resume.luccote.com/", status: "live" },
 ];
 
 export function WorkSwitcher({ current = "three-d", archiveCurrent = false }: { current?: string; archiveCurrent?: boolean }) {

@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { WorkSwitcher } from "../work-switcher";
+
+export const metadata: Metadata = {
+  title: "About | Luc Cote — Games, Film & 3D",
+  description: "About Luc Cote's games, film, interactive 3D, and technical-art practice.",
+  alternates: { canonical: "/about" },
+};
 
 export default function AboutPage() {
   return (
@@ -43,7 +50,7 @@ export default function AboutPage() {
             database management, reporting, and business intelligence—using
             analytical rigor to build clearer systems and better decisions. In
             music, he writes and produces as{" "}
-            <a href="https://dreadstache.com" target="_blank" rel="noreferrer">Dreadstache</a>,
+            <a href="https://music.luccote.com/" target="_blank" rel="noreferrer">Dreadstache</a>,
             an electronic alter ego where sound design, performance, and
             technology collide.
           </p>
