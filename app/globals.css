@@ -229,7 +229,7 @@ footer p { font:10px Manrope; letter-spacing:0; }
 
 /* Public browsing keeps the collection inside the viewport, with no card row. */
 .publicWorkspace { grid-template-areas:"stage controls"; }
-.publicWorkspace .stage { min-height:calc(100svh - 84px); }
+.bottomLibraryWorkspace .stage { min-height:calc(100svh - 84px); }
  .modelNavigator { position:absolute; z-index:5; top:auto; left:50%; right:auto; bottom:16px; transform:translateX(-50%); justify-self:auto; width:max-content; max-width:calc(100% - 32px); height:auto; display:flex; gap:12px; align-items:center; padding:0; border:0; border-radius:0; background:transparent; backdrop-filter:none; }
 .modelNavigator button { flex:0 0 44px; width:44px; height:44px; padding:0; border:0; color:var(--ink); background:transparent; font-size:24px; text-shadow:0 2px 6px #000; cursor:pointer; }
 .modelNavigator button:hover { color:var(--acid); }
@@ -238,8 +238,8 @@ footer p { font:10px Manrope; letter-spacing:0; }
 .modelNavigator div { min-width:0; text-align:center; }
 .modelNavigator h1 { margin:0; font:500 clamp(14px,1.7vw,20px)/1.25 Syne; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-shadow:0 2px 6px #000,0 0 12px #000; }
 .modelNavigator span { display:none; }
-.publicWorkspace .stageActions { top:54px; bottom:auto; }
-@media(max-width:680px) { .publicWorkspace .stage { min-height:calc(100svh - 70px); } .modelNavigator { gap:8px; bottom:12px; } .publicWorkspace .stageActions { right:14px; } }
+.bottomLibraryWorkspace .stageActions { top:54px; bottom:auto; }
+@media(max-width:680px) { .bottomLibraryWorkspace .stage { min-height:calc(100svh - 70px); } .modelNavigator { gap:8px; bottom:12px; } .bottomLibraryWorkspace .stageActions { right:14px; } }
 
 html { scroll-padding-top:100px; }
 

@@ -80,7 +80,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
         setSavedOrderIds(data.models.map(model => model.id));
         setOrderRevision(data.orderRevision);
         setCanImport(data.canImport);
-        if (!studioMode && data.models.length) {
+        if (data.models.length) {
           setActive(0);
           setIsModelLoading(true);
           setLoadProgress(0);
@@ -306,8 +306,8 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     <main>
       <Script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js" />
       <header className="topbar">
-        <div className="brand"><span className="brandmark" aria-hidden="true">L</span><span className="identity-copy"><strong>LUCIEN MARCEL COTE</strong><small>{studioMode ? "OWNER MODEL STUDIO" : "GAMES / FILM PORTFOLIO"}</small></span></div>
-        <nav aria-label="Primary"><a className="active" href="#viewer">VIEWER</a>{studioMode && <a href="#collection">COLLECTION</a>}<a href="/archive">ARCHIVE</a><a href="/about">ABOUT</a></nav>
+        <div className="brand"><span className="brandmark" aria-hidden="true">L</span><span className="identity-copy"><strong>LUCIEN MARCEL COTE</strong><small>GAMES / FILM PORTFOLIO</small></span></div>
+        <nav aria-label="Primary"><a className="active" href="#viewer">VIEWER</a><a href="/archive">ARCHIVE</a><a href="#about">ABOUT</a></nav>
         <WorkSwitcher />
       </header>
 
@@ -379,12 +379,11 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
           </div>
           <div className="stageTop"><span className="statusDot"/> LIVE VIEWPORT <span className="divider"/> {uploadedName || piece.file}</div>
           <div className="viewportHint">DRAG TO ORBIT <span>•</span> SCROLL TO ZOOM</div>
-          {studioMode ? <div className="modelTitle"><span>{piece.kind.toUpperCase()}</span><h1>{uploadedName ? uploadedName.replace(/\.(glb|gltf)$/i, "") : piece.title}</h1><p>{uploadedName ? "CUSTOM IMPORT" : `${piece.polys} POLYGONS`}</p></div> :
             <nav className="modelNavigator" aria-label="Browse models">
-              <button type="button" onClick={() => stepModel(-1)} disabled={savedModels.length < 2} aria-label="Previous model">←</button>
+              <button type="button" onClick={() => stepModel(-1)} disabled={savedModels.length < 2 || (studioMode && collectionBusy)} aria-label="Previous model">←</button>
               <div aria-live="polite" aria-atomic="true"><h1>{savedModels.length ? uploadedName.replace(/\.(glb|gltf)$/i, "") : libraryStatus === "loading" ? "Loading collection…" : libraryStatus === "error" ? "Collection unavailable" : "The collection is being prepared"}</h1><span>{savedModels.length ? `${Math.max(0, savedModels.findIndex(model => model.url === modelSrc)) + 1} / ${savedModels.length}` : ""}</span></div>
-              <button type="button" onClick={() => stepModel(1)} disabled={savedModels.length < 2} aria-label="Next model">→</button>
-            </nav>}
+              <button type="button" onClick={() => stepModel(1)} disabled={savedModels.length < 2 || (studioMode && collectionBusy)} aria-label="Next model">→</button>
+            </nav>
           <div className="stageActions"><button onClick={() => setRotate(!rotate)} className={rotate ? "isOn" : ""}>↻ AUTO ROTATE</button><button onClick={() => setWireframe(!wireframe)} className={wireframe ? "isOn" : ""}>◇ EDGES</button></div>
         </section>
 
@@ -400,7 +399,20 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
           <div className="saveNote"><span>{studioMode ? "OWNER REVIEW WORKSPACE" : "CLIENT SHOWCASE"}</span><p>{studioMode ? "Saved models and collection order are shared with the public viewer." : "A curated presentation of selected Lucien Marcel Cote artwork."}</p></div>
         </aside>
       </section>
-      <footer id="about"><span>LUCIEN MARCEL COTE / 2026</span><p>A focused showcase for original game and film development artwork.</p><span>GAMES / FILM PORTFOLIO</span></footer>
+      <section id="about" className="aboutPage">
+        <section className="aboutHero">
+          <div className="aboutIndex">ABOUT / 01</div>
+          <div className="aboutIntro"><p className="eyebrow">ARTIST · DESIGNER · TECHNICAL CREATOR</p><h1>LUCIEN<br/>MARCEL COTE</h1><p className="aboutLead">A multidisciplinary creator working where art, technology, and interactive storytelling meet.</p></div>
+          <div className="aboutMark" aria-hidden="true">L</div>
+        </section>
+        <section className="aboutGrid">
+          <article><span>01 / PROFILE</span><h2>BUILDING WORLDS WITH A TECHNICAL EYE.</h2><p>Game developer, 3D artist, and educator working across Unreal Engine, Unity, gameplay programming, technical art, photogrammetry, digital sculpture, and real-time experiences.</p></article>
+          <article><span>02 / PRACTICE</span><h2>FROM CAPTURE TO PRESENTATION.</h2><p>The work moves between artistic exploration and production: shaping models, developing technical workflows, and presenting finished assets in interactive contexts.</p></article>
+          <article className="contactCard"><span>03 / CONTACT</span><h2>LET'S MAKE SOMETHING MEMORABLE.</h2><p>For projects, collaborations, and portfolio inquiries:</p><a href="mailto:info@luccote.com">info@luccote.com <b>↗</b></a></article>
+        </section>
+      </section>
+
+      <footer><span>LUCIEN MARCEL COTE / 2026</span><p>A focused showcase for original game and film development artwork.</p><span>GAMES / FILM PORTFOLIO</span></footer>
     </main>
   );
 }
