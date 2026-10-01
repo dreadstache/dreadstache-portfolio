@@ -97,7 +97,7 @@ function updateScene(event) {
     lightingTimer = setTimeout(() => {
       const previous = lightingUrl;
       lightingUrl = URL.createObjectURL(createLightingEnvironment(Number(lightX), Number(lightY), color));
-      viewer.environmentImage = lightingUrl;
+      viewer.environmentImage = lightingUrl + "#.hdr";
       if (previous) setTimeout(() => URL.revokeObjectURL(previous), 1000);
     }, 150);
   } else viewer.environmentImage = "neutral";

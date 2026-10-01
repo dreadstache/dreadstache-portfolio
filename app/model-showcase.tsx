@@ -39,7 +39,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     let url: string | undefined;
     const timer = window.setTimeout(() => {
       url = URL.createObjectURL(createLightingEnvironment(lightX, lightY, lightColor));
-      setEnvironment(url);
+      setEnvironment(url + "#.hdr");
     }, 150);
     return () => { window.clearTimeout(timer); if (url) URL.revokeObjectURL(url); };
   }, [customLighting, lightX, lightY, lightColor]);
