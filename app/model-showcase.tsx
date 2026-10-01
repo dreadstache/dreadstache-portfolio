@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { createLightingEnvironment } from "./lighting";
+import { moveToTarget, validateUpload, uploadSequentially } from "./studio-interactions";
 import { WorkSwitcher } from "./work-switcher";
 import React, { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 
@@ -54,6 +55,13 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   const [uploadState, setUploadState] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [uploadMessage, setUploadMessage] = useState("");
   const [removingId, setRemovingId] = useState("");
+  const uploadLock = useRef(false);
+  const dragSource = useRef<string | null>(null);
+  const dragTarget = useRef<string | null>(null);
+  const [draggingId, setDraggingId] = useState<string | null>(null);
+  const [dropTargetId, setDropTargetId] = useState<string | null>(null);
+  const [fileDropActive, setFileDropActive] = useState(false);
+  const [uploadQueue, setUploadQueue] = useState<{ name: string; status: string; progress: number }[]>([]);
   const collectionBusy = savingOrder || uploadState === "saving" || Boolean(removingId);
   const [isModelLoading, setIsModelLoading] = useState(true);
   const [loadProgress, setLoadProgress] = useState(0);
@@ -120,46 +128,76 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     setUploadedName("");
   }
 
-  async function uploadModel(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    if (file.size > 100 * 1024 * 1024) {
-      setUploadState("error"); setUploadMessage("That model is over the 100 MB limit."); return;
-    }
-    const extension = file.name.split(".").pop()?.toLowerCase() || "glb";
-    const originalName = file.name.replace(/\.(glb|gltf)$/i, "");
-    const requestedName = window.prompt("Name this model for the showcase:", originalName);
-    if (requestedName === null) { event.target.value = ""; return; }
-    const displayName = `${requestedName.trim().replace(/\.(glb|gltf)$/i, "") || originalName}.${extension}`;
-    if (objectUrl.current) URL.revokeObjectURL(objectUrl.current);
-    objectUrl.current = URL.createObjectURL(file);
-    setIsModelLoading(true);
-    setLoadProgress(0);
-    setModelSrc(objectUrl.current);
-    setUploadedName(displayName);
-    setUploadState("saving"); setUploadMessage("Saving model to the shared library…");
-
+  async function uploadFiles(files: File[]) {
+    if (!files.length || !canImport || uploadLock.current || collectionBusy) return;
+    if (orderDirty) { setUploadMessage("Save or reset your collection order before uploading."); return; }
+    uploadLock.current = true;
+    setUploadState("saving");
+    setUploadQueue(files.map(file => ({ name: file.name, status: "Queued", progress: 0 })));
+    const update = (index: number, status: string, progress = 0) => setUploadQueue(current => current.map((item, i) => i === index ? { ...item, status, progress } : item));
     try {
-      const response = await fetch("/api/models", {
-        method: "POST",
-        headers: { "content-type": file.type || "application/octet-stream", "x-model-name": encodeURIComponent(displayName) },
-        body: file,
+      const result = await uploadSequentially(files, async (file, index) => {
+        setUploadMessage(`Uploading ${index + 1} of ${files.length}: ${file.name}`);
+        const invalid = validateUpload(file);
+        if (invalid) { update(index, invalid); throw new Error(invalid); }
+        update(index, "Uploading");
+        try {
+          const data = await new Promise<{ model: SavedModel; models: SavedModel[]; orderRevision: string | null }>((resolve, reject) => {
+            const request = new XMLHttpRequest();
+            request.open("POST", "/api/models");
+            request.setRequestHeader("content-type", file.type || "application/octet-stream");
+            request.setRequestHeader("x-model-name", encodeURIComponent(file.name));
+            request.timeout = 600000;
+            request.upload.onprogress = event => {
+              if (event.lengthComputable) update(index, event.loaded === event.total ? "Saving" : "Uploading", Math.round(event.loaded / event.total * 100));
+            };
+            request.onload = () => {
+              try {
+                const data = JSON.parse(request.responseText);
+                if (request.status < 200 || request.status >= 300 || !data.model) throw new Error(data.error || "Upload failed");
+                resolve(data);
+              } catch (error) { reject(error); }
+            };
+            request.onerror = () => reject(new Error("Connection failed. Choose this file again to retry."));
+            request.ontimeout = () => reject(new Error("Upload timed out. Choose this file again to retry."));
+            request.send(file);
+          });
+          setSavedModels(data.models);
+          setSavedOrderIds(data.models.map(model => model.id));
+          setOrderRevision(data.orderRevision);
+          setIsModelLoading(true); setLoadProgress(0);
+          setModelSrc(data.model.url); setUploadedName(data.model.name);
+          update(index, "Saved", 100);
+        } catch (error) {
+          update(index, error instanceof Error ? error.message : "Upload failed. Choose this file again to retry.");
+          throw error;
+        }
       });
-      const data = await response.json() as { model?: SavedModel; models: SavedModel[]; orderRevision: string | null; error?: string };
-      if (!response.ok || !data.model) throw new Error(data.error || "Upload failed");
-      setSavedModels(data.models);
-      setSavedOrderIds(data.models.map(model => model.id));
-      setOrderRevision(data.orderRevision);
-      setModelSrc(data.model.url);
-      setUploadState("saved"); setUploadMessage("Saved. Visitors can now select this model.");
-    } catch (error) {
-      setUploadState("error"); setUploadMessage(error instanceof Error ? error.message : "The model could not be saved.");
-    } finally {
-      event.target.value = "";
+      setUploadState(result.failed ? "error" : "saved");
+      setUploadMessage(`${result.succeeded} saved${result.failed ? ` · ${result.failed} failed. Choose the failed files again to retry.` : ". Ready to arrange your collection."}`);
+    } finally { uploadLock.current = false; }
+  }
+
+  function uploadModel(event: ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(event.target.files || []);
+    event.target.value = "";
+    void uploadFiles(files);
+  }
+
+  function finishDrag(commit: boolean) {
+    if (commit && dragSource.current && dragTarget.current && !collectionBusy) {
+      const source = dragSource.current, target = dragTarget.current;
+      if (source !== target) {
+        setSavedModels(current => moveToTarget(current, source, target));
+        setOrderMessage("Order changed. Save it to update the public collection.");
+      }
     }
+    dragSource.current = null; dragTarget.current = null;
+    setDraggingId(null); setDropTargetId(null);
   }
 
   function selectSavedModel(model: SavedModel) {
+    if (uploadLock.current) return;
     setIsModelLoading(true); setLoadProgress(0);
     setActive(0); setModelSrc(model.url); setUploadedName(model.name);
     setUploadState("saved"); setUploadMessage("Viewing a saved library model.");
@@ -227,11 +265,11 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   }
 
   useEffect(() => {
-    if (!orderDirty) return;
+    if (!orderDirty && uploadState !== "saving") return;
     const warn = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = ""; };
     window.addEventListener("beforeunload", warn);
     return () => window.removeEventListener("beforeunload", warn);
-  }, [orderDirty]);
+  }, [orderDirty, uploadState]);
 
   function stepModel(direction: number) {
     if (savedModels.length < 2) return;
@@ -278,14 +316,34 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
           <div className="sectionLabel"><span>01</span> {studioMode ? "MODEL LIBRARY" : "SELECT MODEL"}</div>
           <div className="studioLibraryBar"><div className="libraryHead"><span>{studioMode ? "SAVED MODELS" : "SHOWCASE MODELS"}</span><div>{!studioMode && <a className="archiveShortcut" href="/archive">EARLIER WORK ↗</a>}<button aria-label="Previous models" onClick={() => moveCarousel(-1)}>←</button><button aria-label="Next models" onClick={() => moveCarousel(1)}>→</button></div></div>
           {studioMode && canImport && <div className="orderToolbar">
-            <span>Use the arrows to arrange your collection.</span>
+            <span>Drag a handle to reorder, or use the arrows. Save your arrangement when ready.</span>
             <button type="button" onClick={saveOrder} disabled={!orderDirty || collectionBusy}>{savingOrder ? "SAVING…" : "SAVE ORDER"}</button>
             <button type="button" onClick={resetOrder} disabled={!orderDirty || collectionBusy}>RESET</button>
             <p role="status" aria-live="polite">{orderMessage}</p>
           </div>}
           <div className="modelCarousel" ref={carouselRef} aria-label={studioMode ? "Saved model row" : "Showcase model row"}>
-            {savedModels.length ? savedModels.map((model, index) => <div key={model.id} className={modelSrc === model.url ? "savedCard selectedCard" : "savedCard"}>
-              <button className="savedSelect" onClick={() => selectSavedModel(model)}>
+            {savedModels.length ? savedModels.map((model, index) => <div key={model.id} data-model-id={model.id} className={`savedCard${modelSrc === model.url ? " selectedCard" : ""}${draggingId === model.id ? " isDragging" : ""}${dropTargetId === model.id ? " dropTarget" : ""}`}>
+              {canImport && <button type="button" className="modelDragHandle" disabled={collectionBusy} aria-label={`Drag ${model.name} to reorder; use Earlier and Later buttons for keyboard moves`}
+                onPointerDown={event => {
+                  if (event.button !== 0 || collectionBusy) return;
+                  event.preventDefault(); event.currentTarget.setPointerCapture(event.pointerId);
+                  dragSource.current = model.id; setDraggingId(model.id);
+                }}
+                onPointerMove={event => {
+                  if (!dragSource.current) return;
+                  const carousel = carouselRef.current;
+                  if (carousel) {
+                    const bounds = carousel.getBoundingClientRect();
+                    if (event.clientX < bounds.left + 40) carousel.scrollBy({ left: -22 });
+                    else if (event.clientX > bounds.right - 40) carousel.scrollBy({ left: 22 });
+                  }
+                  const card = document.elementFromPoint(event.clientX, event.clientY)?.closest<HTMLElement>("[data-model-id]");
+                  dragTarget.current = card?.dataset.modelId || null;
+                  setDropTargetId(dragTarget.current);
+                }}
+                onPointerUp={() => finishDrag(true)} onPointerCancel={() => finishDrag(false)} onLostPointerCapture={() => finishDrag(false)}
+                onKeyDown={event => { if (event.key === "Escape") finishDrag(false); }}>⠿ DRAG</button>}
+              <button className="savedSelect" disabled={uploadState === "saving"} onClick={() => selectSavedModel(model)}>
                 <span className="savedGlyph">{String(index + 1).padStart(2, "0")}</span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB · {studioMode ? "SAVED" : "VIEW"}</small>
               </button>
               {studioMode && canImport && <div className="modelOrderControls">
@@ -295,10 +353,16 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
               {studioMode && canImport && <button className="removeModel" disabled={collectionBusy || orderDirty} aria-label={`Remove ${model.name} from library`} onClick={() => removeSavedModel(model)}>{removingId === model.id ? "REMOVING…" : "REMOVE"}</button>}
             </div>) : <div className="emptyLibrary">{studioMode ? "Your saved models will appear here." : "The next collection is being prepared."}</div>}
           </div></div>
-          {studioMode && canImport && <div className="uploadCard">
-            <span>ADD TO LIBRARY</span><strong>{uploadedName || "Upload a model"}</strong><p>GLB or GLTF, up to 100 MB. Uploaded models are saved for visitors to view. Save or reset any order changes before adding or removing models.</p>
-            <label className={uploadState === "saving" ? "isSaving" : ""}>{uploadState === "saving" ? "SAVING…" : "CHOOSE & SAVE FILE"}<input disabled={collectionBusy || orderDirty} type="file" accept=".glb,.gltf" onChange={uploadModel}/></label>
-            {uploadMessage && <p className={`uploadStatus ${uploadState}`}>{uploadMessage}</p>}
+          {studioMode && canImport && <div className={`uploadCard${fileDropActive ? " fileDropActive" : ""}`} onDragOver={event => {
+            if (!event.dataTransfer.types.includes("Files")) return;
+            event.preventDefault(); event.dataTransfer.dropEffect = collectionBusy || orderDirty ? "none" : "copy";
+            setFileDropActive(!collectionBusy && !orderDirty);
+          }} onDragLeave={event => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFileDropActive(false); }}
+          onDrop={event => { event.preventDefault(); setFileDropActive(false); void uploadFiles(Array.from(event.dataTransfer.files)); }}>
+            <span>ADD TO LIBRARY</span><strong>{uploadedName || "Upload a model"}</strong><p>Drop one or more models here, or choose files. GLB with embedded textures recommended; 100 MB per file. Save or reset order changes before uploading.</p>
+            <label className={uploadState === "saving" ? "isSaving" : ""}>{uploadState === "saving" ? "SAVING…" : "CHOOSE FILES"}<input disabled={collectionBusy || orderDirty} type="file" multiple accept=".glb,.gltf" onChange={uploadModel}/></label>
+            {uploadMessage && <p role="status" className={`uploadStatus ${uploadState}`}>{uploadMessage}</p>}
+            {!!uploadQueue.length && <ul className="uploadQueue" aria-label="Upload queue">{uploadQueue.map((item, index) => <li key={index}><strong>{item.name}</strong><span>{item.status}{item.status === "Uploading" ? ` · ${item.progress}%` : ""}</span>{["Uploading", "Saving"].includes(item.status) && <progress aria-label={`Upload progress for ${item.name}`} max={100} value={item.progress}/>}</li>)}</ul>}
           </div>}
         </aside>}
 

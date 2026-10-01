@@ -266,3 +266,15 @@ html { scroll-padding-top:100px; }
  html { scroll-padding-top:86px; }
 }
 @media print { .site-header, .topbar, .shared-site-header { display:none; } }
+
+.modelDragHandle { width:100%; padding:8px; border:0; border-bottom:1px solid var(--line); color:var(--muted); background:transparent; cursor:grab; touch-action:none; font-size:10px; letter-spacing:.1em; }
+.modelDragHandle:active { cursor:grabbing; }
+.modelDragHandle:focus-visible { outline:2px solid var(--acid); outline-offset:-2px; }
+.savedCard.isDragging { opacity:.55; }
+.savedCard.dropTarget { outline:2px solid var(--acid); outline-offset:-2px; }
+.uploadCard.fileDropActive { outline:2px dashed var(--acid); background:#ff2f7514; }
+.uploadQueue { list-style:none; padding:0; margin:12px 0 0; max-height:240px; overflow:auto; }
+.uploadQueue li { display:grid; gap:4px; padding:8px 0; border-top:1px solid var(--line); font-size:11px; overflow-wrap:anywhere; }
+.uploadQueue li strong { margin:0; font-size:11px; }
+.uploadQueue span { font-size:10px; }
+.uploadQueue progress { width:100%; height:4px; accent-color:var(--acid); }
