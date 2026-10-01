@@ -7,7 +7,7 @@ html { scroll-behavior:smooth; }
 body { margin:0; background:#0c0b0c; color:var(--ink); font-family:Manrope, sans-serif; }
 button, input { font:inherit; }
 button, a, label { -webkit-tap-highlight-color:transparent; }
-.topbar { height:84px; display:grid; grid-template-columns:290px 1fr 290px; align-items:center; border-bottom:1px solid var(--line); padding:0 24px; position:relative; z-index:5; background:#0c0b0cf2; }
+.topbar { height:84px; display:grid; grid-template-columns:290px 1fr 290px; align-items:center; border-bottom:1px solid var(--line); padding:0 24px; position:sticky; top:0; z-index:50; background:#0c0b0cf2; }
 .brand { color:inherit; text-decoration:none; display:flex; gap:11px; align-items:center; font-family:DM Mono; font-size:13px; line-height:1; letter-spacing:.13em; }
 .brand small { color:var(--muted); font-size:8px; letter-spacing:.18em; }
 .brandmark { position:relative; width:34px; height:34px; display:grid; place-items:center; font-family:Syne; font-size:19px; text-indent:4px; }
@@ -240,3 +240,5 @@ footer p { font:10px Manrope; letter-spacing:0; }
 .modelNavigator span { display:none; }
 .publicWorkspace .stageActions { top:54px; bottom:auto; }
 @media(max-width:680px) { .publicWorkspace .stage { min-height:calc(100svh - 70px); } .modelNavigator { gap:8px; bottom:12px; } .publicWorkspace .stageActions { right:14px; } }
+
+html { scroll-padding-top:100px; }

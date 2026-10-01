@@ -20,10 +20,10 @@ export default function ArchivePage() {
   return (
     <main className="archivePage">
       <header className="topbar">
-        <a className="brand" href="/" aria-label="Lucien Marcel Cote portfolio home">
+        <div className="brand">
           <span className="brandmark">L</span>
           <span>LUCIEN MARCEL COTE<br/><small>EARLIER WORK &amp; FOUNDATIONS</small></span>
-        </a>
+        </div>
         <nav aria-label="Primary">
           <a href="/">VIEWER</a>
           <a href="/#collection">COLLECTION</a>
