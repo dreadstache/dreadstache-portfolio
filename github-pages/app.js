@@ -40,6 +40,7 @@ function renderWorkLinks(destinations) {
 }
 
 function setLoading(progress = 0) {
+  if (progress >= 0.999) { finishLoading(); return; }
   loader.classList.add("isVisible");
   loader.removeAttribute("aria-hidden");
   const percent = Math.round(progress * 100);
