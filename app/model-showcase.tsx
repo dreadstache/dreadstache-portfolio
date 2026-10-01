@@ -253,7 +253,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     <main>
       <Script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js" />
       <header className="topbar">
-        <div className="brand"><span className="brandmark">L</span><span>LUCIEN MARCEL COTE<br/><small>{studioMode ? "OWNER MODEL STUDIO" : "GAMES / FILM PORTFOLIO"}</small></span></div>
+        <div className="brand"><span className="brandmark" aria-hidden="true">L</span><span className="identity-copy"><strong>LUCIEN MARCEL COTE</strong><small>{studioMode ? "OWNER MODEL STUDIO" : "GAMES / FILM PORTFOLIO"}</small></span></div>
         <nav aria-label="Primary"><a className="active" href="#viewer">VIEWER</a>{studioMode && <a href="#collection">COLLECTION</a>}<a href="/archive">ARCHIVE</a><a href="/about">ABOUT</a></nav>
         <WorkSwitcher />
       </header>

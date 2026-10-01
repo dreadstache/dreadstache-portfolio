@@ -20,10 +20,7 @@ export default function ArchivePage() {
   return (
     <main className="archivePage">
       <header className="topbar">
-        <div className="brand">
-          <span className="brandmark">L</span>
-          <span>LUCIEN MARCEL COTE<br/><small>EARLIER WORK &amp; FOUNDATIONS</small></span>
-        </div>
+        <div className="brand"><span className="brandmark" aria-hidden="true">L</span><span className="identity-copy"><strong>LUCIEN MARCEL COTE</strong><small>EARLIER WORK &amp; FOUNDATIONS</small></span></div>
         <nav aria-label="Primary">
           <a href="/">VIEWER</a>
           <a href="/#collection">COLLECTION</a>
