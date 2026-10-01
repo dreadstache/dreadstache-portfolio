@@ -14,7 +14,7 @@ export default function AboutPage() {
         <div className="brand"><span className="brandmark" aria-hidden="true">L</span><span className="identity-copy"><strong>LUCIEN MARCEL COTE</strong><small>GAMES / FILM PORTFOLIO</small></span></div>
         <nav aria-label="Primary">
           <a href="/">VIEWER</a>
-          <a href="/#collection">COLLECTION</a>
+
           <a href="/archive">ARCHIVE</a>
           <a className="active" href="/about">ABOUT</a>
         </nav>

@@ -23,7 +23,7 @@ export default function ArchivePage() {
         <div className="brand"><span className="brandmark" aria-hidden="true">L</span><span className="identity-copy"><strong>LUCIEN MARCEL COTE</strong><small>EARLIER WORK &amp; FOUNDATIONS</small></span></div>
         <nav aria-label="Primary">
           <a href="/">VIEWER</a>
-          <a href="/#collection">COLLECTION</a>
+
           <a className="active" href="/archive">ARCHIVE</a>
           <a href="/about">ABOUT</a>
         </nav>
