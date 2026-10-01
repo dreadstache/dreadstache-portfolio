@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;600&family=Syne:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=identity-4">
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js"></script>
-    <script type="module" src="app.js"></script>
+    <script defer src="lighting.js?v=real-lighting-1"></script><script defer src="app.js?v=real-lighting-1"></script>
   </head>
   <body>
     <main id="top">
@@ -40,8 +40,8 @@
 
         <section class="stage" id="stage">
           <div class="stageGlow" id="stage-glow"></div>
-          <div class="viewerWrap wireframe" id="viewer-wrap">
-            <model-viewer id="model-viewer" alt="Interactive 3D portfolio model" camera-controls touch-action="pan-y" shadow-intensity="2" exposure="0.2" environment-image="neutral" interaction-prompt="none" auto-rotate rotation-per-second="12deg"></model-viewer>
+          <div class="viewerWrap" id="viewer-wrap">
+            <model-viewer id="model-viewer" alt="Interactive 3D portfolio model" camera-controls touch-action="pan-y" shadow-intensity="0.6" exposure="1" tone-mapping="neutral" environment-image="neutral" interaction-prompt="none" auto-rotate rotation-per-second="12deg"></model-viewer>
           </div>
           <div class="modelLoader isVisible" id="model-loader" aria-live="polite">
             <div class="loaderRing"><span></span></div><strong>LOADING MODEL</strong>
@@ -55,18 +55,18 @@
             <div aria-live="polite" aria-atomic="true"><h1 id="model-title">Loading collection…</h1><span id="model-position"></span></div>
             <button id="models-next" type="button" aria-label="Next model" disabled>→</button>
           </nav>
-          <div class="stageActions"><button id="toggle-rotate" class="isOn">↻ AUTO ROTATE</button><button id="toggle-edges" class="isOn">◇ EDGES</button></div>
+          <div class="stageActions"><button id="toggle-rotate" class="isOn">↻ AUTO ROTATE</button><button id="toggle-edges">◇ EDGES</button></div>
         </section>
 
         <aside class="controls">
           <div class="sectionLabel"><span>02</span> SCENE SETTINGS</div>
-          <div class="control"><div><label for="exposure">EXPOSURE</label><output id="exposure-output">0.20</output></div><input id="exposure" type="range" min="0.2" max="2" step="0.05" value="0.2"></div>
-          <div class="control"><div><label for="shadow">SHADOW</label><output id="shadow-output">2.00</output></div><input id="shadow" type="range" min="0" max="2" step="0.05" value="2"></div>
-          <div class="control"><div><label for="light-x">LIGHT X</label><output id="light-x-output">38</output></div><input id="light-x" type="range" min="0" max="100" value="38"></div>
-          <div class="control"><div><label for="light-y">LIGHT Y</label><output id="light-y-output">22</output></div><input id="light-y" type="range" min="0" max="100" value="22"></div>
-          <div class="colorRow"><label for="light-color">LIGHT COLOR</label><input id="light-color" type="color" value="#ff2f75"><code id="light-color-output">#FF2F75</code></div>
+          <div class="control"><div><label for="exposure">EXPOSURE</label><output id="exposure-output">1.00</output></div><input id="exposure" type="range" min="0.2" max="2" step="0.05" value="1"></div>
+          <div class="control"><div><label for="shadow">SHADOW</label><output id="shadow-output">0.60</output></div><input id="shadow" type="range" min="0" max="2" step="0.05" value="0.6"></div>
+          <div class="control"><div><label for="light-x">LIGHT DIRECTION</label><output id="light-x-output">38</output></div><input id="light-x" type="range" min="0" max="100" value="38"></div>
+          <div class="control"><div><label for="light-y">LIGHT HEIGHT</label><output id="light-y-output">22</output></div><input id="light-y" type="range" min="0" max="100" value="22"></div>
+          <div class="colorRow"><label for="light-color">LIGHT COLOR</label><input id="light-color" type="color" value="#ffffff"><code id="light-color-output">#FFFFFF</code></div>
           <div class="colorRow"><label for="backdrop">BACKDROP</label><input id="backdrop" type="color" value="#3b0814"><code id="backdrop-output">#3B0814</code></div>
-          <div class="presets"><label>LIGHTING PRESETS</label><button data-preset="crimson"><span style="background:#ff2f75"></span>Crimson</button><button data-preset="ember"><span style="background:#ff734c"></span>Ember</button><button data-preset="gallery"><span style="background:#fff5df"></span>Gallery</button></div>
+          <div class="presets"><label>LIGHTING PRESETS</label><button data-preset="neutral"><span style="background:#ffffff"></span>Neutral</button><button data-preset="crimson"><span style="background:#ff2f75"></span>Crimson</button><button data-preset="ember"><span style="background:#ff734c"></span>Ember</button><button data-preset="gallery"><span style="background:#fff5df"></span>Gallery</button></div>
           <div class="saveNote"><span>CLIENT SHOWCASE</span><p>A curated presentation of selected Lucien Marcel Cote artwork.</p></div>
         </aside>
       </section>

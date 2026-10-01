@@ -9,7 +9,7 @@ function setup(){
   if(!elements.has(selector))elements.set(selector,{value:'0.2',style:{},classList:{add(){},remove(){},toggle(){}},setAttribute(){},removeAttribute(){},toggleAttribute(){},addEventListener(){},textContent:'',disabled:true});
   return elements.get(selector);
  };
- const context=vm.createContext({URL,document:{querySelector:element,querySelectorAll:()=>[]},window:{setTimeout:fn=>fn()},fetch:()=>new Promise(()=>{})});
+ const context=vm.createContext({clearTimeout:()=>{},setTimeout:fn=>fn(),URL,document:{querySelector:element,querySelectorAll:()=>[]},window:{setTimeout:fn=>fn()},fetch:()=>new Promise(()=>{})});
  vm.runInContext(readFileSync(new URL('../github-pages/app.js',import.meta.url),'utf8'),context);
  return {element,run:code=>vm.runInContext(code,context)};
 }

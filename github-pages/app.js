@@ -10,6 +10,7 @@ const fallbackDestinations = [
 ];
 
 const presets = {
+  neutral: { exposure: 1, shadow: 0.6, color: "#ffffff", background: "#3b0814" },
   crimson: { exposure: 0.75, shadow: 1.1, color: "#ff2f75", background: "#3b0814" },
   ember: { exposure: 1.15, shadow: 0.7, color: "#ff734c", background: "#160b08" },
   gallery: { exposure: 1.4, shadow: 0.45, color: "#fff5df", background: "#d8d2c7" },
@@ -25,7 +26,10 @@ const stage = document.querySelector("#stage");
 const stageGlow = document.querySelector("#stage-glow");
 let selectedId = "";
 let rotating = true;
-let edges = true;
+let edges = false;
+let customLighting = false;
+let lightingTimer;
+let lightingUrl;
 
 function renderWorkLinks(destinations) {
   const destinationLinks = destinations
@@ -80,13 +84,23 @@ function stepModel(direction) {
   selectModel(collectionModels[(current + direction + collectionModels.length) % collectionModels.length]);
 }
 
-function updateScene() {
+function updateScene(event) {
+  if (["light-x", "light-y", "light-color"].includes(event?.target?.id)) customLighting = true;
   const lightX = document.querySelector("#light-x").value;
   const lightY = document.querySelector("#light-y").value;
   const color = document.querySelector("#light-color").value;
   const background = document.querySelector("#backdrop").value;
   stage.style.backgroundColor = background;
   stageGlow.style.background = `radial-gradient(circle at ${lightX}% ${lightY}%, ${color}66 0, ${color}18 20%, transparent 47%)`;
+  clearTimeout(lightingTimer);
+  if (customLighting) {
+    lightingTimer = setTimeout(() => {
+      const previous = lightingUrl;
+      lightingUrl = URL.createObjectURL(createLightingEnvironment(Number(lightX), Number(lightY), color));
+      viewer.environmentImage = lightingUrl;
+      if (previous) setTimeout(() => URL.revokeObjectURL(previous), 1000);
+    }, 150);
+  } else viewer.environmentImage = "neutral";
   viewer.exposure = Number(document.querySelector("#exposure").value);
   viewer.shadowIntensity = Number(document.querySelector("#shadow").value);
   document.querySelector("#exposure-output").textContent = Number(viewer.exposure).toFixed(2);
@@ -98,6 +112,7 @@ function updateScene() {
 }
 
 function applyPreset(preset) {
+  customLighting = preset !== presets.neutral;
   document.querySelector("#exposure").value = preset.exposure;
   document.querySelector("#shadow").value = preset.shadow;
   document.querySelector("#light-color").value = preset.color;

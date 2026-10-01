@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import { createLightingEnvironment } from "./lighting";
 import { WorkSwitcher } from "./work-switcher";
 import React, { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 
@@ -13,6 +14,7 @@ const pieces = [
 ];
 
 const presets = [
+  { name: "Neutral", exposure: 1, shadow: 0.6, color: "#ffffff", bg: "#3b0814" },
   { name: "Crimson", exposure: 0.75, shadow: 1.1, color: "#ff2f75", bg: "#3b0814" },
   { name: "Ember", exposure: 1.15, shadow: 0.7, color: "#ff734c", bg: "#160b08" },
   { name: "Gallery", exposure: 1.4, shadow: 0.45, color: "#fff5df", bg: "#d8d2c7" },
@@ -22,14 +24,25 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   const [active, setActive] = useState(0);
   const [modelSrc, setModelSrc] = useState(pieces[0].src);
   const [uploadedName, setUploadedName] = useState("");
-  const [exposure, setExposure] = useState(0.2);
-  const [shadow, setShadow] = useState(2.0);
-  const [lightColor, setLightColor] = useState("#ff2f75");
+  const [exposure, setExposure] = useState(1);
+  const [shadow, setShadow] = useState(0.6);
+  const [lightColor, setLightColor] = useState("#ffffff");
   const [background, setBackground] = useState("#3b0814");
   const [lightX, setLightX] = useState(38);
   const [lightY, setLightY] = useState(22);
   const [rotate, setRotate] = useState(true);
-  const [wireframe, setWireframe] = useState(true);
+  const [wireframe, setWireframe] = useState(false);
+  const [customLighting, setCustomLighting] = useState(false);
+  const [environment, setEnvironment] = useState("neutral");
+  useEffect(() => {
+    if (!customLighting) { setEnvironment("neutral"); return; }
+    let url: string | undefined;
+    const timer = window.setTimeout(() => {
+      url = URL.createObjectURL(createLightingEnvironment(lightX, lightY, lightColor));
+      setEnvironment(url);
+    }, 150);
+    return () => { window.clearTimeout(timer); if (url) URL.revokeObjectURL(url); };
+  }, [customLighting, lightX, lightY, lightColor]);
   const [libraryStatus, setLibraryStatus] = useState<"loading" | "ready" | "empty" | "error">("loading");
   const [savedModels, setSavedModels] = useState<SavedModel[]>([]);
   const [savedOrderIds, setSavedOrderIds] = useState<string[]>([]);
@@ -231,6 +244,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   }
 
   function applyPreset(preset: typeof presets[number]) {
+    setCustomLighting(preset.name !== "Neutral");
     setExposure(preset.exposure); setShadow(preset.shadow);
     setLightColor(preset.color); setBackground(preset.bg);
   }
@@ -244,7 +258,8 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     "shadow-intensity": shadow,
     exposure,
     "camera-orbit": piece.camera,
-    "environment-image": "neutral",
+    "environment-image": environment,
+    "tone-mapping": "neutral",
     "interaction-prompt": "none",
     ...(rotate ? { "auto-rotate": true, "rotation-per-second": "12deg" } : {}),
   };
@@ -313,9 +328,9 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
           <div className="sectionLabel"><span>02</span> SCENE SETTINGS</div>
           <Control label="EXPOSURE" value={exposure} min={0.2} max={2} step={0.05} setValue={setExposure}/>
           <Control label="SHADOW" value={shadow} min={0} max={2} step={0.05} setValue={setShadow}/>
-          <Control label="LIGHT X" value={lightX} min={0} max={100} step={1} setValue={setLightX}/>
-          <Control label="LIGHT Y" value={lightY} min={0} max={100} step={1} setValue={setLightY}/>
-          <div className="colorRow"><label>LIGHT COLOR</label><input aria-label="Light color" type="color" value={lightColor} onChange={e => setLightColor(e.target.value)}/><code>{lightColor.toUpperCase()}</code></div>
+          <Control label="LIGHT DIRECTION" value={lightX} min={0} max={100} step={1} setValue={value => { setCustomLighting(true); setLightX(value); }}/>
+          <Control label="LIGHT HEIGHT" value={lightY} min={0} max={100} step={1} setValue={value => { setCustomLighting(true); setLightY(value); }}/>
+          <div className="colorRow"><label>LIGHT COLOR</label><input aria-label="Light color" type="color" value={lightColor} onChange={e => { setCustomLighting(true); setLightColor(e.target.value); }}/><code>{lightColor.toUpperCase()}</code></div>
           <div className="colorRow"><label>BACKDROP</label><input aria-label="Backdrop color" type="color" value={background} onChange={e => setBackground(e.target.value)}/><code>{background.toUpperCase()}</code></div>
           <div className="presets"><label>LIGHTING PRESETS</label>{presets.map(p => <button key={p.name} onClick={() => applyPreset(p)}><span style={{background:p.color}}/>{p.name}</button>)}</div>
           <div className="saveNote"><span>{studioMode ? "OWNER REVIEW WORKSPACE" : "CLIENT SHOWCASE"}</span><p>{studioMode ? "Saved models and collection order are shared with the public viewer." : "A curated presentation of selected Lucien Marcel Cote artwork."}</p></div>
