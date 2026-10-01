@@ -226,3 +226,17 @@ footer p { font:10px Manrope; letter-spacing:0; }
 .orderToolbar { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:8px 0 12px; font:10px DM Mono; color:#aaa2aa; }
 .orderToolbar button { min-height:34px; padding:8px 12px; border:1px solid #4c414c; background:#201a20; color:var(--ink); cursor:pointer; }
 .orderToolbar p { flex-basis:100%; margin:0; }
+
+/* Public browsing keeps the collection inside the viewport, with no card row. */
+.publicWorkspace { grid-template-areas:"stage controls"; }
+.publicWorkspace .stage { min-height:calc(100svh - 84px); }
+.modelNavigator { position:absolute; z-index:5; left:20px; right:20px; bottom:16px; display:grid; grid-template-columns:44px minmax(0,1fr) 44px; gap:12px; align-items:center; padding:10px; border:1px solid #ffffff25; border-radius:8px; background:#111014d9; backdrop-filter:blur(12px); }
+.modelNavigator button { width:44px; height:44px; border:1px solid #ffffff30; border-radius:5px; color:var(--ink); background:#211c24; font-size:22px; cursor:pointer; }
+.modelNavigator button:hover { border-color:var(--acid); color:var(--acid); }
+.modelNavigator button:focus-visible { outline:2px solid var(--acid); outline-offset:3px; }
+.modelNavigator button:disabled { opacity:.35; cursor:default; }
+.modelNavigator div { min-width:0; text-align:center; }
+.modelNavigator h1 { margin:0; font:500 clamp(14px,1.7vw,22px)/1.25 Syne; overflow-wrap:anywhere; }
+.modelNavigator span { display:block; margin-top:5px; color:#b4aeb7; font:9px DM Mono; }
+.publicWorkspace .stageActions { bottom:110px; }
+@media(max-width:680px) { .publicWorkspace .stage { min-height:calc(100svh - 70px); } .modelNavigator { left:12px; right:12px; gap:8px; } .publicWorkspace .stageActions { right:14px; } }

@@ -30,6 +30,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   const [lightY, setLightY] = useState(22);
   const [rotate, setRotate] = useState(true);
   const [wireframe, setWireframe] = useState(true);
+  const [libraryStatus, setLibraryStatus] = useState<"loading" | "ready" | "empty" | "error">("loading");
   const [savedModels, setSavedModels] = useState<SavedModel[]>([]);
   const [savedOrderIds, setSavedOrderIds] = useState<string[]>([]);
   const [orderRevision, setOrderRevision] = useState<string | null>(null);
@@ -52,6 +53,8 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     fetch("/api/models", { cache: "no-store" })
       .then((response) => response.ok ? response.json() : Promise.reject())
       .then((data: { models: SavedModel[]; canImport: boolean; orderRevision: string | null }) => {
+        setLibraryStatus(data.models.length ? "ready" : "empty");
+        if (!data.models.length) setIsModelLoading(false);
         setSavedModels(data.models);
         setSavedOrderIds(data.models.map(model => model.id));
         setOrderRevision(data.orderRevision);
@@ -64,7 +67,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
           setUploadedName(data.models[0].name);
         }
       })
-      .catch(() => setUploadMessage("Showcase library is temporarily unavailable."));
+      .catch(() => { setLibraryStatus("error"); setIsModelLoading(false); setUploadMessage("Showcase library is temporarily unavailable."); });
   }, []);
 
   useEffect(() => {
@@ -217,6 +220,12 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
     return () => window.removeEventListener("beforeunload", warn);
   }, [orderDirty]);
 
+  function stepModel(direction: number) {
+    if (savedModels.length < 2) return;
+    const current = Math.max(0, savedModels.findIndex(model => model.url === modelSrc));
+    selectSavedModel(savedModels[(current + direction + savedModels.length) % savedModels.length]);
+  }
+
   function moveCarousel(direction: number) {
     carouselRef.current?.scrollBy({ left: direction * 190, behavior: "smooth" });
   }
@@ -245,12 +254,12 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
       <Script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js" />
       <header className="topbar">
         <a className="brand" href="#top" aria-label="Lucien Marcel Cote portfolio home"><span className="brandmark">L</span><span>LUCIEN MARCEL COTE<br/><small>{studioMode ? "OWNER MODEL STUDIO" : "GAMES / FILM PORTFOLIO"}</small></span></a>
-        <nav aria-label="Primary"><a className="active" href="#viewer">VIEWER</a><a href="#collection">COLLECTION</a><a href="/archive">ARCHIVE</a><a href="/about">ABOUT</a></nav>
+        <nav aria-label="Primary"><a className="active" href="#viewer">VIEWER</a>{studioMode && <a href="#collection">COLLECTION</a>}<a href="/archive">ARCHIVE</a><a href="/about">ABOUT</a></nav>
         <WorkSwitcher />
       </header>
 
       <section id="viewer" className={studioMode ? "workspace bottomLibraryWorkspace studioWorkspace" : "workspace bottomLibraryWorkspace publicWorkspace"}>
-        <aside className="collection" id="collection">
+        {studioMode && <aside className="collection" id="collection">
           <div className="sectionLabel"><span>01</span> {studioMode ? "MODEL LIBRARY" : "SELECT MODEL"}</div>
           <div className="studioLibraryBar"><div className="libraryHead"><span>{studioMode ? "SAVED MODELS" : "SHOWCASE MODELS"}</span><div>{!studioMode && <a className="archiveShortcut" href="/archive">EARLIER WORK ↗</a>}<button aria-label="Previous models" onClick={() => moveCarousel(-1)}>←</button><button aria-label="Next models" onClick={() => moveCarousel(1)}>→</button></div></div>
           {studioMode && canImport && <div className="orderToolbar">
@@ -276,7 +285,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
             <label className={uploadState === "saving" ? "isSaving" : ""}>{uploadState === "saving" ? "SAVING…" : "CHOOSE & SAVE FILE"}<input disabled={collectionBusy || orderDirty} type="file" accept=".glb,.gltf" onChange={uploadModel}/></label>
             {uploadMessage && <p className={`uploadStatus ${uploadState}`}>{uploadMessage}</p>}
           </div>}
-        </aside>
+        </aside>}
 
         <section className="stage" style={{ backgroundColor: background }}>
           <div className="stageGlow" style={glow}/>
@@ -291,7 +300,12 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
           </div>
           <div className="stageTop"><span className="statusDot"/> LIVE VIEWPORT <span className="divider"/> {uploadedName || piece.file}</div>
           <div className="viewportHint">DRAG TO ORBIT <span>•</span> SCROLL TO ZOOM</div>
-          <div className="modelTitle"><span>{piece.kind.toUpperCase()}</span><h1>{uploadedName ? uploadedName.replace(/\.(glb|gltf)$/i, "") : piece.title}</h1><p>{uploadedName ? "CUSTOM IMPORT" : `${piece.polys} POLYGONS`}</p></div>
+          {studioMode ? <div className="modelTitle"><span>{piece.kind.toUpperCase()}</span><h1>{uploadedName ? uploadedName.replace(/\.(glb|gltf)$/i, "") : piece.title}</h1><p>{uploadedName ? "CUSTOM IMPORT" : `${piece.polys} POLYGONS`}</p></div> :
+            <nav className="modelNavigator" aria-label="Browse models">
+              <button type="button" onClick={() => stepModel(-1)} disabled={savedModels.length < 2} aria-label="Previous model">←</button>
+              <div aria-live="polite" aria-atomic="true"><h1>{savedModels.length ? uploadedName.replace(/\.(glb|gltf)$/i, "") : libraryStatus === "loading" ? "Loading collection…" : libraryStatus === "error" ? "Collection unavailable" : "The collection is being prepared"}</h1><span>{savedModels.length ? `${Math.max(0, savedModels.findIndex(model => model.url === modelSrc)) + 1} / ${savedModels.length}` : ""}</span></div>
+              <button type="button" onClick={() => stepModel(1)} disabled={savedModels.length < 2} aria-label="Next model">→</button>
+            </nav>}
           <div className="stageActions"><button onClick={() => setRotate(!rotate)} className={rotate ? "isOn" : ""}>↻ AUTO ROTATE</button><button onClick={() => setWireframe(!wireframe)} className={wireframe ? "isOn" : ""}>◇ EDGES</button></div>
         </section>
 

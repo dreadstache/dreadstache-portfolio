@@ -6,7 +6,7 @@ const fallbackDestinations = [
   { id: "three-d", label: "Games, Film & 3D", description: "Interactive models and technical art.", url: "./", status: "live" },
   { id: "music", label: "Music", description: "Dreadstache releases and production.", url: "https://music.luccote.com/", status: "live" },
   { id: "resumes", label: "Résumé Library", description: "Focused, verified career stories.", url: "https://resume.luccote.com/", status: "live" },
-  {"id": "archive", "label": "The Archive", "description": "Earlier work, production history, and creative foundations.", "url": "https://games.luccote.com/archive.html", "status": "live"},
+  { id: "archive", label: "The Archive", description: "Earlier work, production history, and creative foundations.", url: "https://games.luccote.com/archive.html", status: "live" },
 ];
 
 const presets = {
@@ -17,7 +17,7 @@ const presets = {
 
 const viewer = document.querySelector("#model-viewer");
 const viewerWrap = document.querySelector("#viewer-wrap");
-const modelList = document.querySelector("#model-list");
+let collectionModels = [];
 const loader = document.querySelector("#model-loader");
 const loaderProgress = document.querySelector("#loader-progress");
 const loaderCopy = document.querySelector("#loader-copy");
@@ -59,18 +59,25 @@ function selectModel(model) {
   viewer.alt = `Interactive 3D view of ${model.name}`;
   document.querySelector("#model-file").textContent = model.name;
   document.querySelector("#model-title").textContent = model.name.replace(/\.(glb|gltf)$/i, "");
-  document.querySelector("#model-meta").textContent = `${(model.size / 1024 / 1024).toFixed(1)} MB · INTERACTIVE MODEL`;
-  document.querySelectorAll(".savedCard").forEach((card) => card.classList.toggle("selectedCard", card.dataset.id === selectedId));
+  document.querySelector("#model-position").textContent = `${collectionModels.findIndex(item => item.id === selectedId) + 1} / ${collectionModels.length}`;
 }
 
 function renderModels(models) {
+  collectionModels = models;
+  document.querySelector("#models-prev").disabled = models.length < 2;
+  document.querySelector("#models-next").disabled = models.length < 2;
   if (!models.length) {
-    modelList.innerHTML = `<div class="emptyLibrary">The collection is being prepared. <a href="${API_ORIGIN}">Open the hosted viewer ↗</a></div>`;
+    document.querySelector("#model-title").textContent = "The collection is being prepared";
+    finishLoading();
     return;
   }
-  modelList.innerHTML = models.map((model, index) => `<div class="savedCard" data-id="${model.id}"><button class="savedSelect"><span class="savedGlyph">${String(index + 1).padStart(2, "0")}</span><strong>${model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>${(model.size / 1024 / 1024).toFixed(1)} MB · VIEW</small></button></div>`).join("");
-  modelList.querySelectorAll(".savedCard").forEach((card, index) => card.querySelector("button").addEventListener("click", () => selectModel(models[index])));
   selectModel(models[0]);
+}
+
+function stepModel(direction) {
+  if (collectionModels.length < 2) return;
+  const current = Math.max(0, collectionModels.findIndex(model => model.id === selectedId));
+  selectModel(collectionModels[(current + direction + collectionModels.length) % collectionModels.length]);
 }
 
 function updateScene() {
@@ -100,15 +107,15 @@ function applyPreset(preset) {
 
 renderWorkLinks(fallbackDestinations);
 fetch(ECOSYSTEM_URL, { cache: "no-store" }).then((response) => response.ok ? response.json() : Promise.reject()).then((manifest) => Array.isArray(manifest.destinations) && renderWorkLinks(manifest.destinations)).catch(() => undefined);
-fetch(`${API_ORIGIN}/api/models`).then((response) => response.ok ? response.json() : Promise.reject()).then((data) => renderModels(data.models || [])).catch(() => { modelList.innerHTML = `<div class="emptyLibrary">The live collection is temporarily unavailable. <a href="${API_ORIGIN}">Open the hosted viewer ↗</a></div>`; finishLoading(); });
+fetch(`${API_ORIGIN}/api/models`, { cache: "no-store" }).then((response) => response.ok ? response.json() : Promise.reject()).then((data) => renderModels(data.models || [])).catch(() => { document.querySelector("#model-title").textContent = "Collection temporarily unavailable"; finishLoading(); });
 
 viewer.addEventListener("load", finishLoading);
 viewer.addEventListener("error", finishLoading);
 viewer.addEventListener("progress", (event) => setLoading(event.detail?.totalProgress || 0));
 document.querySelectorAll('.controls input[type="range"], .controls input[type="color"]').forEach((input) => input.addEventListener("input", updateScene));
 document.querySelectorAll("[data-preset]").forEach((button) => button.addEventListener("click", () => applyPreset(presets[button.dataset.preset])));
-document.querySelector("#models-prev").addEventListener("click", () => modelList.scrollBy({ left: -190, behavior: "smooth" }));
-document.querySelector("#models-next").addEventListener("click", () => modelList.scrollBy({ left: 190, behavior: "smooth" }));
+document.querySelector("#models-prev").addEventListener("click", () => stepModel(-1));
+document.querySelector("#models-next").addEventListener("click", () => stepModel(1));
 document.querySelector("#toggle-rotate").addEventListener("click", (event) => { rotating = !rotating; viewer.toggleAttribute("auto-rotate", rotating); event.currentTarget.classList.toggle("isOn", rotating); });
 document.querySelector("#toggle-edges").addEventListener("click", (event) => { edges = !edges; viewerWrap.classList.toggle("wireframe", edges); event.currentTarget.classList.toggle("isOn", edges); });
 updateScene();

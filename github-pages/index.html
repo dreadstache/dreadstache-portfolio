@@ -26,7 +26,6 @@
         </a>
         <nav aria-label="Primary">
           <a class="active" href="#viewer">VIEWER</a>
-          <a href="#collection">COLLECTION</a>
           <a href="archive.html">ARCHIVE</a>
           <a href="#about">ABOUT</a>
         </nav>
@@ -40,13 +39,7 @@
       </header>
 
       <section id="viewer" class="workspace bottomLibraryWorkspace publicWorkspace">
-        <aside class="collection" id="collection">
-          <div class="sectionLabel"><span>01</span> SELECT MODEL</div>
-          <div class="studioLibraryBar">
-            <div class="libraryHead"><span>SHOWCASE MODELS</span><div><a class="archiveShortcut" href="archive.html">EARLIER WORK ↗</a><button id="models-prev" aria-label="Previous models">←</button><button id="models-next" aria-label="Next models">→</button></div></div>
-            <div class="modelCarousel" id="model-list" aria-label="Showcase model row"><div class="emptyLibrary">Loading the collection…</div></div>
-          </div>
-        </aside>
+
 
         <section class="stage" id="stage">
           <div class="stageGlow" id="stage-glow"></div>
@@ -60,7 +53,11 @@
           </div>
           <div class="stageTop"><span class="statusDot"></span> LIVE VIEWPORT <span class="divider"></span> <span id="model-file">SELECT A MODEL</span></div>
           <div class="viewportHint">DRAG TO ORBIT <span>•</span> SCROLL TO ZOOM</div>
-          <div class="modelTitle"><span>INTERACTIVE 3D COLLECTION</span><h1 id="model-title">LUCIEN MARCEL COTE</h1><p id="model-meta">CURATED SHOWCASE</p></div>
+          <nav class="modelNavigator" aria-label="Browse models">
+            <button id="models-prev" type="button" aria-label="Previous model" disabled>←</button>
+            <div aria-live="polite" aria-atomic="true"><h1 id="model-title">Loading collection…</h1><span id="model-position"></span></div>
+            <button id="models-next" type="button" aria-label="Next model" disabled>→</button>
+          </nav>
           <div class="stageActions"><button id="toggle-rotate" class="isOn">↻ AUTO ROTATE</button><button id="toggle-edges" class="isOn">◇ EDGES</button></div>
         </section>
 
