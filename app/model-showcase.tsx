@@ -31,10 +31,16 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   const [rotate, setRotate] = useState(true);
   const [wireframe, setWireframe] = useState(true);
   const [savedModels, setSavedModels] = useState<SavedModel[]>([]);
+  const [savedOrderIds, setSavedOrderIds] = useState<string[]>([]);
+  const [orderRevision, setOrderRevision] = useState<string | null>(null);
+  const [savingOrder, setSavingOrder] = useState(false);
+  const [orderMessage, setOrderMessage] = useState("");
+  const orderDirty = savedModels.map(model => model.id).join("|") !== savedOrderIds.join("|");
   const [canImport, setCanImport] = useState(false);
   const [uploadState, setUploadState] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [uploadMessage, setUploadMessage] = useState("");
   const [removingId, setRemovingId] = useState("");
+  const collectionBusy = savingOrder || uploadState === "saving" || Boolean(removingId);
   const [isModelLoading, setIsModelLoading] = useState(true);
   const [loadProgress, setLoadProgress] = useState(0);
   const objectUrl = useRef<string | null>(null);
@@ -43,10 +49,12 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
   const piece = pieces[active];
 
   useEffect(() => {
-    fetch("/api/models")
+    fetch("/api/models", { cache: "no-store" })
       .then((response) => response.ok ? response.json() : Promise.reject())
-      .then((data: { models: SavedModel[]; canImport: boolean }) => {
+      .then((data: { models: SavedModel[]; canImport: boolean; orderRevision: string | null }) => {
         setSavedModels(data.models);
+        setSavedOrderIds(data.models.map(model => model.id));
+        setOrderRevision(data.orderRevision);
         setCanImport(data.canImport);
         if (!studioMode && data.models.length) {
           setActive(0);
@@ -121,9 +129,11 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
         headers: { "content-type": file.type || "application/octet-stream", "x-model-name": encodeURIComponent(displayName) },
         body: file,
       });
-      const data = await response.json() as { model?: SavedModel; error?: string };
+      const data = await response.json() as { model?: SavedModel; models: SavedModel[]; orderRevision: string | null; error?: string };
       if (!response.ok || !data.model) throw new Error(data.error || "Upload failed");
-      setSavedModels((current) => [data.model!, ...current.filter((item) => item.id !== data.model!.id)]);
+      setSavedModels(data.models);
+      setSavedOrderIds(data.models.map(model => model.id));
+      setOrderRevision(data.orderRevision);
       setModelSrc(data.model.url);
       setUploadState("saved"); setUploadMessage("Saved. Visitors can now select this model.");
     } catch (error) {
@@ -151,6 +161,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
       const data = await response.json() as { error?: string };
       if (!response.ok) throw new Error(data.error || "The model could not be removed.");
       setSavedModels((current) => current.filter((item) => item.id !== model.id));
+      setSavedOrderIds((current) => current.filter(id => id !== model.id));
       if (modelSrc === model.url) selectPiece(0);
       setUploadState("saved");
       setUploadMessage(`${displayName} was removed from the library.`);
@@ -161,6 +172,50 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
       setRemovingId("");
     }
   }
+
+  function moveModel(index: number, direction: number) {
+    const target = index + direction;
+    if (collectionBusy || target < 0 || target >= savedModels.length) return;
+    setSavedModels(current => {
+      const next = [...current];
+      [next[index], next[target]] = [next[target], next[index]];
+      return next;
+    });
+    setOrderMessage("Order changed. Save it to update the public collection.");
+  }
+
+  function resetOrder() {
+    const ranks = new Map(savedOrderIds.map((id, index) => [id, index]));
+    setSavedModels(current => [...current].sort((a, b) => (ranks.get(a.id) ?? 0) - (ranks.get(b.id) ?? 0)));
+    setOrderMessage("Unsaved order changes discarded.");
+  }
+
+  async function saveOrder() {
+    if (!orderDirty || collectionBusy) return;
+    setSavingOrder(true);
+    setOrderMessage("Saving collection order…");
+    try {
+      const response = await fetch("/api/models", {
+        method: "PATCH", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ids: savedModels.map(model => model.id), revision: orderRevision }),
+      });
+      const data = await response.json() as { models: SavedModel[]; orderRevision: string; error?: string };
+      if (!response.ok) throw new Error(data.error || "The order could not be saved.");
+      setSavedModels(data.models);
+      setSavedOrderIds(data.models.map(model => model.id));
+      setOrderRevision(data.orderRevision);
+      setOrderMessage("Saved. The public collection now uses this order.");
+    } catch (error) {
+      setOrderMessage(error instanceof Error ? error.message : "The order could not be saved. Your changes are still here.");
+    } finally { setSavingOrder(false); }
+  }
+
+  useEffect(() => {
+    if (!orderDirty) return;
+    const warn = (event: BeforeUnloadEvent) => { event.preventDefault(); event.returnValue = ""; };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [orderDirty]);
 
   function moveCarousel(direction: number) {
     carouselRef.current?.scrollBy({ left: direction * 190, behavior: "smooth" });
@@ -198,17 +253,27 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
         <aside className="collection" id="collection">
           <div className="sectionLabel"><span>01</span> {studioMode ? "MODEL LIBRARY" : "SELECT MODEL"}</div>
           <div className="studioLibraryBar"><div className="libraryHead"><span>{studioMode ? "SAVED MODELS" : "SHOWCASE MODELS"}</span><div>{!studioMode && <a className="archiveShortcut" href="/archive">EARLIER WORK ↗</a>}<button aria-label="Previous models" onClick={() => moveCarousel(-1)}>←</button><button aria-label="Next models" onClick={() => moveCarousel(1)}>→</button></div></div>
+          {studioMode && canImport && <div className="orderToolbar">
+            <span>Use the arrows to arrange your collection.</span>
+            <button type="button" onClick={saveOrder} disabled={!orderDirty || collectionBusy}>{savingOrder ? "SAVING…" : "SAVE ORDER"}</button>
+            <button type="button" onClick={resetOrder} disabled={!orderDirty || collectionBusy}>RESET</button>
+            <p role="status" aria-live="polite">{orderMessage}</p>
+          </div>}
           <div className="modelCarousel" ref={carouselRef} aria-label={studioMode ? "Saved model row" : "Showcase model row"}>
             {savedModels.length ? savedModels.map((model, index) => <div key={model.id} className={modelSrc === model.url ? "savedCard selectedCard" : "savedCard"}>
               <button className="savedSelect" onClick={() => selectSavedModel(model)}>
                 <span className="savedGlyph">{String(index + 1).padStart(2, "0")}</span><strong>{model.name.replace(/\.(glb|gltf)$/i, "")}</strong><small>{(model.size / 1024 / 1024).toFixed(1)} MB · {studioMode ? "SAVED" : "VIEW"}</small>
               </button>
-              {studioMode && canImport && <button className="removeModel" disabled={removingId === model.id} aria-label={`Remove ${model.name} from library`} onClick={() => removeSavedModel(model)}>{removingId === model.id ? "REMOVING…" : "REMOVE"}</button>}
+              {studioMode && canImport && <div className="modelOrderControls">
+                <button type="button" disabled={index === 0 || collectionBusy} aria-label={`Move ${model.name} earlier`} onClick={() => moveModel(index, -1)}>← EARLIER</button>
+                <button type="button" disabled={index === savedModels.length - 1 || collectionBusy} aria-label={`Move ${model.name} later`} onClick={() => moveModel(index, 1)}>LATER →</button>
+              </div>}
+              {studioMode && canImport && <button className="removeModel" disabled={collectionBusy || orderDirty} aria-label={`Remove ${model.name} from library`} onClick={() => removeSavedModel(model)}>{removingId === model.id ? "REMOVING…" : "REMOVE"}</button>}
             </div>) : <div className="emptyLibrary">{studioMode ? "Your saved models will appear here." : "The next collection is being prepared."}</div>}
           </div></div>
           {studioMode && canImport && <div className="uploadCard">
-            <span>ADD TO LIBRARY</span><strong>{uploadedName || "Upload a model"}</strong><p>GLB or GLTF, up to 100 MB. Uploaded models are saved for visitors to view.</p>
-            <label className={uploadState === "saving" ? "isSaving" : ""}>{uploadState === "saving" ? "SAVING…" : "CHOOSE & SAVE FILE"}<input disabled={uploadState === "saving"} type="file" accept=".glb,.gltf" onChange={uploadModel}/></label>
+            <span>ADD TO LIBRARY</span><strong>{uploadedName || "Upload a model"}</strong><p>GLB or GLTF, up to 100 MB. Uploaded models are saved for visitors to view. Save or reset any order changes before adding or removing models.</p>
+            <label className={uploadState === "saving" ? "isSaving" : ""}>{uploadState === "saving" ? "SAVING…" : "CHOOSE & SAVE FILE"}<input disabled={collectionBusy || orderDirty} type="file" accept=".glb,.gltf" onChange={uploadModel}/></label>
             {uploadMessage && <p className={`uploadStatus ${uploadState}`}>{uploadMessage}</p>}
           </div>}
         </aside>
@@ -239,7 +304,7 @@ export default function ModelShowcase({ studioMode = false }: { studioMode?: boo
           <div className="colorRow"><label>LIGHT COLOR</label><input aria-label="Light color" type="color" value={lightColor} onChange={e => setLightColor(e.target.value)}/><code>{lightColor.toUpperCase()}</code></div>
           <div className="colorRow"><label>BACKDROP</label><input aria-label="Backdrop color" type="color" value={background} onChange={e => setBackground(e.target.value)}/><code>{background.toUpperCase()}</code></div>
           <div className="presets"><label>LIGHTING PRESETS</label>{presets.map(p => <button key={p.name} onClick={() => applyPreset(p)}><span style={{background:p.color}}/>{p.name}</button>)}</div>
-          <div className="saveNote"><span>{studioMode ? "OWNER REVIEW WORKSPACE" : "CLIENT SHOWCASE"}</span><p>{studioMode ? "Uploaded models remain available in your private evaluation library." : "A curated presentation of selected Lucien Marcel Cote artwork."}</p></div>
+          <div className="saveNote"><span>{studioMode ? "OWNER REVIEW WORKSPACE" : "CLIENT SHOWCASE"}</span><p>{studioMode ? "Saved models and collection order are shared with the public viewer." : "A curated presentation of selected Lucien Marcel Cote artwork."}</p></div>
         </aside>
       </section>
       <footer id="about"><span>LUCIEN MARCEL COTE / 2026</span><p>A focused showcase for original game and film development artwork.</p><span>GAMES / FILM PORTFOLIO</span></footer>
