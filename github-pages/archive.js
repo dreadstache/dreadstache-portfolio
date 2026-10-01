@@ -4,6 +4,7 @@ const fallbackDestinations = [
   { id: "three-d", label: "Games, Film & 3D", description: "Interactive models and technical art.", url: "./", status: "live" },
   { id: "music", label: "Music", description: "Dreadstache releases and production.", url: "https://music.luccote.com/", status: "live" },
   { id: "resumes", label: "Résumé Library", description: "Focused, verified career stories.", url: "https://resume.luccote.com/", status: "live" },
+  {"id": "archive", "label": "The Archive", "description": "Earlier work, production history, and creative foundations.", "url": "https://games.luccote.com/archive.html", "status": "live"},
 ];
 
 function escapeHtml(value) {
@@ -13,8 +14,8 @@ function escapeHtml(value) {
 }
 
 function renderWorkLinks(destinations) {
-  const destinationLinks = destinations.filter((item) => item.status === "live" && item.url).map((item) => `<a href="${item.id === "three-d" ? "./" : item.url}"><strong>${escapeHtml(item.label)}</strong><span>${escapeHtml(item.description)}</span></a>`).join("");
-  document.querySelector("#work-links").innerHTML = `${destinationLinks}<a href="archive.html" aria-current="page"><strong>The Archive</strong><span>Earlier work, production history, and creative foundations.</span></a>`;
+  const destinationLinks = destinations.filter((item) => item.status === "live" && item.url).map((item) => `<a href="${item.id === "three-d" ? "./" : item.url}" ${item.id === "archive" ? 'aria-current="page"' : ""}><strong>${escapeHtml(item.label)}</strong><span>${escapeHtml(item.description)}</span></a>`).join("");
+  document.querySelector("#work-links").innerHTML = destinationLinks;
 }
 
 function renderArchive(archive) {

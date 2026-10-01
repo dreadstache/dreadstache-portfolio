@@ -6,6 +6,7 @@ const fallbackDestinations = [
   { id: "three-d", label: "Games, Film & 3D", description: "Interactive models and technical art.", url: "./", status: "live" },
   { id: "music", label: "Music", description: "Dreadstache releases and production.", url: "https://music.luccote.com/", status: "live" },
   { id: "resumes", label: "Résumé Library", description: "Focused, verified career stories.", url: "https://resume.luccote.com/", status: "live" },
+  {"id": "archive", "label": "The Archive", "description": "Earlier work, production history, and creative foundations.", "url": "https://games.luccote.com/archive.html", "status": "live"},
 ];
 
 const presets = {
@@ -31,7 +32,7 @@ function renderWorkLinks(destinations) {
     .filter((destination) => destination.status === "live" && destination.url)
     .map((destination) => `<a href="${destination.id === "three-d" ? "./" : destination.url}" ${destination.id === "three-d" ? 'aria-current="page"' : ""}><strong>${destination.label}</strong><span>${destination.description}</span></a>`)
     .join("");
-  document.querySelector("#work-links").innerHTML = `${destinationLinks}<a href="archive.html"><strong>The Archive</strong><span>Earlier work, production history, and creative foundations.</span></a>`;
+  document.querySelector("#work-links").innerHTML = destinationLinks;
 }
 
 function setLoading(progress = 0) {
